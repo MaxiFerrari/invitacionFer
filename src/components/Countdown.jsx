@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
-/** Fecha del evento: 15 de Octubre de 2026, 18:00 hrs */
-const EVENT_DATE = new Date("2026-10-15T18:00:00");
+/** Fecha del evento: 23 de Marzo de 2026, 18:00 hrs */
+const EVENT_DATE = new Date("2026-03-23T18:00:00");
 
 function calculateTimeLeft() {
   const now = new Date();

@@ -50,7 +50,7 @@ export default function EventInfo() {
               <div className="space-y-2 font-body text-lila-light/80 text-sm">
                 <p className="flex items-center gap-2">
                   <span className="text-dorado/70">📅</span>
-                  15 de Octubre de 2026
+                  23 de Marzo de 2026
                 </p>
                 <p className="flex items-center gap-2">
                   <span className="text-dorado/70">🕕</span>
@@ -81,7 +81,7 @@ export default function EventInfo() {
               <div className="space-y-2 font-body text-lila-light/80 text-sm">
                 <p className="flex items-center gap-2">
                   <span className="text-dorado/70">📅</span>
-                  15 de Octubre de 2026
+                  23 de Marzo de 2026
                 </p>
                 <p className="flex items-center gap-2">
                   <span className="text-dorado/70">🕗</span>
