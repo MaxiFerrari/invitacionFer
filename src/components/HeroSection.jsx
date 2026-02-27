@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useTheme, themeStyles } from "../context/ThemeContext";
 
 /** SVG decorativo de un sol de Rapunzel */
 function RapunzelSun({ className = "" }) {
@@ -207,8 +208,10 @@ function TowerSilhouette({ className = "" }) {
  * Hero Section — Nombre de la quinceañera con torre y sol de Rapunzel.
  */
 export default function HeroSection() {
+  const { theme } = useTheme();
+
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 py-20 overflow-hidden">
+    <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 py-20 overflow-hidden transition-all duration-500">
       {/* Sol decorativo */}
       <motion.div
         initial={{ opacity: 0, scale: 0.5, rotate: -30 }}
@@ -216,7 +219,13 @@ export default function HeroSection() {
         transition={{ duration: 1.5, ease: "easeOut" }}
         className="absolute top-6 right-6 md:top-12 md:right-16"
       >
-        <RapunzelSun className="w-24 h-24 md:w-36 md:h-36 animate-float-slow drop-shadow-[0_0_30px_rgba(255,215,0,0.4)]" />
+        <RapunzelSun className={`w-24 h-24 md:w-36 md:h-36 animate-float-slow ${
+          theme === 'magico'
+            ? 'drop-shadow-[0_0_30px_rgba(255,215,0,0.4)]'
+            : theme === 'castillo'
+              ? 'drop-shadow-[0_0_20px_rgba(180,130,0,0.2)] opacity-70'
+              : 'drop-shadow-[0_0_20px_rgba(244,114,182,0.3)] opacity-80'
+        }`} />
       </motion.div>
 
       {/* Torre */}
@@ -224,9 +233,11 @@ export default function HeroSection() {
         initial={{ opacity: 0, x: -60 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1.2, delay: 0.3 }}
-        className="absolute left-2 bottom-0 md:left-12"
+        className={`absolute left-2 bottom-0 md:left-12 transition-opacity duration-500 ${
+          theme === 'castillo' ? 'opacity-40' : 'opacity-60'
+        }`}
       >
-        <TowerSilhouette className="w-24 h-40 md:w-32 md:h-56 opacity-60" />
+        <TowerSilhouette className="w-24 h-40 md:w-32 md:h-56" />
       </motion.div>
 
       {/* Contenido principal */}
@@ -241,7 +252,7 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
-          className="font-elegant text-lila-light text-lg md:text-2xl tracking-[0.3em] uppercase mb-4"
+          className={`font-elegant text-lg md:text-2xl tracking-[0.3em] uppercase mb-4 transition-colors duration-500 ${themeStyles.subtitle[theme]}`}
         >
           Mis XV Años
         </motion.p>
@@ -251,7 +262,7 @@ export default function HeroSection() {
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ delay: 1.2, duration: 0.8 }}
-          className="w-40 md:w-64 h-[1px] mx-auto mb-6 bg-gradient-to-r from-transparent via-dorado to-transparent"
+          className={`w-40 md:w-64 h-[1px] mx-auto mb-6 transition-all duration-500 ${themeStyles.decorLine[theme]}`}
         />
 
         {/* Nombre */}
@@ -264,7 +275,7 @@ export default function HeroSection() {
             type: "spring",
             stiffness: 100,
           }}
-          className="font-fairy text-7xl md:text-9xl lg:text-[10rem] text-dorado drop-shadow-[0_0_40px_rgba(255,215,0,0.3)] mb-6 leading-tight"
+          className={`font-fairy text-7xl md:text-9xl lg:text-[10rem] mb-6 leading-tight transition-all duration-500 ${themeStyles.titleFairy[theme]}`}
         >
           Jazmín
         </motion.h1>
@@ -274,7 +285,7 @@ export default function HeroSection() {
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ delay: 1.4, duration: 0.8 }}
-          className="w-40 md:w-64 h-[1px] mx-auto mb-8 bg-gradient-to-r from-transparent via-dorado to-transparent"
+          className={`w-40 md:w-64 h-[1px] mx-auto mb-8 transition-all duration-500 ${themeStyles.decorLine[theme]}`}
         />
 
         {/* Frase */}
@@ -282,7 +293,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.8, duration: 0.8 }}
-          className="font-elegant italic text-xl md:text-3xl text-lila-light/90 max-w-lg mx-auto"
+          className={`font-elegant italic text-xl md:text-3xl max-w-lg mx-auto transition-colors duration-500 ${themeStyles.subtitle[theme]}`}
         >
           "Mi destino empieza aquí"
         </motion.p>
@@ -306,7 +317,7 @@ export default function HeroSection() {
         className="absolute bottom-8 animate-bounce"
       >
         <svg
-          className="w-8 h-8 text-dorado/60"
+          className={`w-8 h-8 transition-colors duration-500 ${themeStyles.scrollArrow[theme]}`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"

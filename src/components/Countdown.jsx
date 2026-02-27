@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useTheme, themeStyles } from "../context/ThemeContext";
 
 /** Fecha del evento: 23 de Marzo de 2026, 18:00 hrs */
 const EVENT_DATE = new Date("2026-03-23T18:00:00");
@@ -21,7 +22,7 @@ function calculateTimeLeft() {
   };
 }
 
-function TimeUnit({ value, label, index }) {
+function TimeUnit({ value, label, index, theme }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -32,14 +33,14 @@ function TimeUnit({ value, label, index }) {
     >
       <div className="relative">
         {/* Glow */}
-        <div className="absolute inset-0 bg-dorado/10 rounded-2xl blur-xl" />
-        <div className="relative w-20 h-24 md:w-28 md:h-32 flex items-center justify-center rounded-2xl border border-dorado/30 bg-noche/60 backdrop-blur-md shadow-[0_0_20px_rgba(255,215,0,0.1)]">
-          <span className="font-elegant text-4xl md:text-5xl font-bold text-dorado tabular-nums">
+        <div className={`absolute inset-0 rounded-2xl blur-xl transition-colors duration-500 ${themeStyles.countdownGlow[theme]}`} />
+        <div className={`relative w-20 h-24 md:w-28 md:h-32 flex items-center justify-center rounded-2xl border transition-all duration-500 ${themeStyles.countdownUnit[theme]}`}>
+          <span className={`font-elegant text-4xl md:text-5xl font-bold tabular-nums transition-colors duration-500 ${themeStyles.countdownValue[theme]}`}>
             {String(value).padStart(2, "0")}
           </span>
         </div>
       </div>
-      <span className="mt-3 text-xs md:text-sm font-body uppercase tracking-[0.2em] text-lila-light/70">
+      <span className={`mt-3 text-xs md:text-sm font-body uppercase tracking-[0.2em] transition-colors duration-500 ${themeStyles.countdownLabel[theme]}`}>
         {label}
       </span>
     </motion.div>
@@ -51,6 +52,7 @@ function TimeUnit({ value, label, index }) {
  */
 export default function Countdown() {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -76,10 +78,10 @@ export default function Countdown() {
         className="max-w-2xl mx-auto text-center"
       >
         {/* Título */}
-        <h2 className="font-fairy text-4xl md:text-5xl text-dorado mb-2">
+        <h2 className={`font-fairy text-4xl md:text-5xl mb-2 transition-colors duration-500 ${themeStyles.sectionTitle[theme]}`}>
           Faltan
         </h2>
-        <p className="font-elegant text-lila-light/60 text-lg mb-10 italic">
+        <p className={`font-elegant text-lg mb-10 italic transition-colors duration-500 ${themeStyles.subtitleMuted[theme]}`}>
           para que se cumpla mi sueño
         </p>
 
@@ -88,7 +90,7 @@ export default function Countdown() {
           <motion.p
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
-            className="font-fairy text-5xl text-dorado"
+            className={`font-fairy text-5xl transition-colors duration-500 ${themeStyles.sectionTitle[theme]}`}
           >
             ¡Es hoy! ✨
           </motion.p>
@@ -100,6 +102,7 @@ export default function Countdown() {
                 value={unit.value}
                 label={unit.label}
                 index={i}
+                theme={theme}
               />
             ))}
           </div>
@@ -111,7 +114,7 @@ export default function Countdown() {
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.8, duration: 0.8 }}
-          className="w-48 h-[1px] mx-auto mt-12 bg-gradient-to-r from-transparent via-lila to-transparent"
+          className={`w-48 h-[1px] mx-auto mt-12 transition-all duration-500 ${themeStyles.decorLineLila[theme]}`}
         />
       </motion.div>
     </section>

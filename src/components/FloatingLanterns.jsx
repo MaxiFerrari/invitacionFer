@@ -1,10 +1,14 @@
 import { useMemo } from "react";
+import { useTheme } from "../context/ThemeContext";
 
 /**
  * Fondo animado de cielo nocturno con linternas flotantes al estilo Tangled.
  * Cada linterna tiene un delay y duración aleatorios para un efecto orgánico.
+ * Solo visible en tema "mágico"; en otros temas se desvanece.
  */
 export default function FloatingLanterns({ count = 25 }) {
+  const { theme } = useTheme();
+
   const lanterns = useMemo(() => {
     return Array.from({ length: count }, (_, i) => ({
       id: i,
@@ -17,7 +21,9 @@ export default function FloatingLanterns({ count = 25 }) {
   }, [count]);
 
   return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div className={`fixed inset-0 overflow-hidden pointer-events-none z-0 transition-opacity duration-700 ${
+      theme === 'magico' ? 'opacity-100' : 'opacity-0'
+    }`}>
       {/* Cielo con gradiente animado */}
       <div className="absolute inset-0 bg-gradient-to-b from-noche via-noche-light to-morado/40 animate-gradient" />
 
