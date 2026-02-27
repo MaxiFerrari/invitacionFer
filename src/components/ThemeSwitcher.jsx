@@ -54,15 +54,14 @@ export default function ThemeSwitcher() {
         )}
       </AnimatePresence>
 
-      {/* Botón FAB principal — visible con color */}
-      <motion.button
+      {/* Botón FAB principal — siempre visible */}
+      <button
         onClick={() => { setIsOpen((o) => !o); setShowHint(false); }}
-        className="w-14 h-14 rounded-full bg-gradient-to-br from-lila-dark to-rosa-oro border-2 border-white/50 shadow-xl shadow-lila-dark/30 flex items-center justify-center text-xl text-white hover:shadow-2xl transition-all duration-300"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 1.5, type: "spring", stiffness: 200 }}
+        className="relative w-14 h-14 rounded-full border-2 border-white/50 shadow-xl flex items-center justify-center text-xl text-white hover:shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
+        style={{
+          background: "linear-gradient(135deg, #7b2d8e 0%, #b76e79 100%)",
+          boxShadow: "0 4px 20px rgba(123,45,142,0.4)",
+        }}
         aria-label="Cambiar diseño"
       >
         {/* Anillo pulsante para llamar atención */}
@@ -73,19 +72,16 @@ export default function ThemeSwitcher() {
             transition={{ duration: 1.5, repeat: Infinity }}
           />
         )}
-        <motion.span
-          animate={{ rotate: isOpen ? 90 : 0 }}
-          transition={{ duration: 0.3 }}
-        >
+        <span className={`inline-block transition-transform duration-300 ${isOpen ? "rotate-90" : ""}`}>
           🎨
-        </motion.span>
-      </motion.button>
+        </span>
+      </button>
 
       {/* Panel de opciones */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="absolute top-14 right-0 bg-white/90 backdrop-blur-xl border border-lila-light/30 rounded-2xl shadow-2xl shadow-lila/15 overflow-hidden min-w-[200px]"
+            className="absolute top-16 right-0 bg-white/95 backdrop-blur-xl border border-lila-light/30 rounded-2xl shadow-2xl overflow-hidden min-w-[220px]"
             initial={{ opacity: 0, y: -10, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.9 }}
