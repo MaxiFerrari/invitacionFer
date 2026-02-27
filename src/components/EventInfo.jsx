@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 const WHATSAPP_NUMBER = "5215512345678";
 const WHATSAPP_MSG = encodeURIComponent(
-  "¡Hola! Confirmo mi asistencia a los XV de Jazmín 🌸"
+  "¡Hola! Confirmo mi asistencia a los XV de Jazmín 🌸",
 );
 
 const fadeUp = {
@@ -81,10 +81,14 @@ export default function EventInfo() {
               >
                 {evt.time}
               </p>
-              <p className={`${s.bodyFont} text-base ${s.textColor} font-medium`}>
+              <p
+                className={`${s.bodyFont} text-base ${s.textColor} font-medium`}
+              >
                 {evt.place}
               </p>
-              <p className={`${s.bodyFont} text-sm ${s.textColor} opacity-70 mt-1`}>
+              <p
+                className={`${s.bodyFont} text-sm ${s.textColor} opacity-70 mt-1`}
+              >
                 {evt.address}
               </p>
             </motion.div>
@@ -98,9 +102,7 @@ export default function EventInfo() {
           variants={fadeUp}
         >
           <span className="text-3xl mb-3 block">👗</span>
-          <h3
-            className={`${s.headingFont} text-xl ${s.headingColor} mb-2`}
-          >
+          <h3 className={`${s.headingFont} text-xl ${s.headingColor} mb-2`}>
             Código de Vestimenta
           </h3>
           <p className={`${s.bodyFont} text-base ${s.textColor}`}>

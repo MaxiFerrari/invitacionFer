@@ -61,13 +61,15 @@ export const S = {
     countdownLabel: "text-lila/70",
 
     // Galería
-    photoBorder: "border-4 border-lila-light rounded-full shadow-lg shadow-lila-light/20",
+    photoBorder:
+      "border-4 border-lila-light rounded-full shadow-lg shadow-lila-light/20",
     photoShape: "rounded-full",
     photoWrapper: "flex flex-wrap justify-center gap-8",
 
     // Botones
     buttonBg: "bg-rosa-oro hover:bg-rosa-oro-light text-white",
-    buttonOutline: "border-2 border-rosa-oro text-rosa-oro hover:bg-rosa-oro/10",
+    buttonOutline:
+      "border-2 border-rosa-oro text-rosa-oro hover:bg-rosa-oro/10",
 
     // Fuentes
     titleFont: "font-fairy",
@@ -104,12 +106,14 @@ export const S = {
     countdownNum: "text-lila-deep",
     countdownLabel: "text-rosa-oro/80",
 
-    photoBorder: "border-2 border-marfil-dark/20 rounded-lg shadow-2xl shadow-black/15",
+    photoBorder:
+      "border-2 border-marfil-dark/20 rounded-lg shadow-2xl shadow-black/15",
     photoShape: "rounded-lg",
     photoWrapper: "grid grid-cols-1 md:grid-cols-2 gap-6",
 
     buttonBg: "bg-lila-dark hover:bg-morado-deep text-white shadow-xl",
-    buttonOutline: "border-2 border-lila-dark text-lila-dark hover:bg-lila-dark/10",
+    buttonOutline:
+      "border-2 border-lila-dark text-lila-dark hover:bg-lila-dark/10",
 
     titleFont: "font-editorial",
     headingFont: "font-editorial",
@@ -126,8 +130,10 @@ export const S = {
   bruma: {
     pageBg: "bg-gradient-to-b from-lila-pastel/40 via-white to-lila-light/30",
     sectionBg: "bg-transparent",
-    cardBg: "bg-white/20 backdrop-blur-xl border border-white/30 shadow-xl shadow-lila/10",
-    heroBg: "bg-gradient-to-b from-lila-light/30 via-white/50 to-lila-pastel/20",
+    cardBg:
+      "bg-white/20 backdrop-blur-xl border border-white/30 shadow-xl shadow-lila/10",
+    heroBg:
+      "bg-gradient-to-b from-lila-light/30 via-white/50 to-lila-pastel/20",
     footerBg: "bg-gradient-to-t from-lila-light/30 to-transparent",
 
     titleColor: "text-lila-dark",
@@ -149,7 +155,8 @@ export const S = {
     photoWrapper: "flex flex-wrap justify-center gap-6",
 
     buttonBg: "bg-rosa-oro/80 backdrop-blur-sm hover:bg-rosa-oro text-white",
-    buttonOutline: "border-2 border-white/50 text-white hover:bg-white/10 backdrop-blur-sm",
+    buttonOutline:
+      "border-2 border-white/50 text-white hover:bg-white/10 backdrop-blur-sm",
 
     titleFont: "font-calligraphy",
     headingFont: "font-elegant",

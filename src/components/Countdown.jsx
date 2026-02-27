@@ -20,7 +20,12 @@ function calcTimeLeft() {
   };
 }
 
-const labels = { dias: "Días", horas: "Horas", minutos: "Min", segundos: "Seg" };
+const labels = {
+  dias: "Días",
+  horas: "Horas",
+  minutos: "Min",
+  segundos: "Seg",
+};
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },

@@ -56,7 +56,10 @@ export default function ThemeSwitcher() {
 
       {/* Botón FAB principal — siempre visible */}
       <button
-        onClick={() => { setIsOpen((o) => !o); setShowHint(false); }}
+        onClick={() => {
+          setIsOpen((o) => !o);
+          setShowHint(false);
+        }}
         className="relative w-14 h-14 rounded-full border-2 border-white/50 shadow-xl flex items-center justify-center text-xl text-white hover:shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
         style={{
           background: "linear-gradient(135deg, #7b2d8e 0%, #b76e79 100%)",
@@ -72,7 +75,9 @@ export default function ThemeSwitcher() {
             transition={{ duration: 1.5, repeat: Infinity }}
           />
         )}
-        <span className={`inline-block transition-transform duration-300 ${isOpen ? "rotate-90" : ""}`}>
+        <span
+          className={`inline-block transition-transform duration-300 ${isOpen ? "rotate-90" : ""}`}
+        >
           🎨
         </span>
       </button>

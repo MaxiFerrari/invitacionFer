@@ -80,8 +80,18 @@ function HeroFlores({ styles: s }) {
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
       >
-        <svg className="w-6 h-6 text-rosa-oro/50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        <svg
+          className="w-6 h-6 text-rosa-oro/50"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 14l-7 7m0 0l-7-7m7 7V3"
+          />
         </svg>
       </motion.div>
     </section>
@@ -145,13 +155,19 @@ function HeroEditorial({ styles: s }) {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.8, duration: 1 }}
           >
-            <p className={`${s.headingFont} text-6xl md:text-7xl font-light ${s.accentColor}`}>
+            <p
+              className={`${s.headingFont} text-6xl md:text-7xl font-light ${s.accentColor}`}
+            >
               23
             </p>
-            <p className={`${s.bodyFont} text-xs tracking-[0.4em] uppercase ${s.textColor} mt-2`}>
+            <p
+              className={`${s.bodyFont} text-xs tracking-[0.4em] uppercase ${s.textColor} mt-2`}
+            >
               Marzo · 2026
             </p>
-            <p className={`${s.bodyFont} text-xs tracking-[0.3em] uppercase ${s.subtitleColor} mt-1`}>
+            <p
+              className={`${s.bodyFont} text-xs tracking-[0.3em] uppercase ${s.subtitleColor} mt-1`}
+            >
               18:00 hrs
             </p>
           </motion.div>
@@ -164,7 +180,9 @@ function HeroEditorial({ styles: s }) {
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
       >
-        <p className={`${s.bodyFont} text-xs tracking-[0.3em] uppercase ${s.textColor} rotate-90 origin-left`}>
+        <p
+          className={`${s.bodyFont} text-xs tracking-[0.3em] uppercase ${s.textColor} rotate-90 origin-left`}
+        >
           scroll
         </p>
       </motion.div>

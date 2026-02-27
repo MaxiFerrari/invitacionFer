@@ -56,7 +56,10 @@ function GalleryFlores({ s }) {
         >
           <motion.div
             className="w-36 h-36 md:w-44 md:h-44 rounded-full overflow-hidden border-4 border-lila-light shadow-lg shadow-lila-light/20"
-            whileHover={{ scale: 1.08, boxShadow: "0 8px 30px rgba(201,160,220,0.3)" }}
+            whileHover={{
+              scale: 1.08,
+              boxShadow: "0 8px 30px rgba(201,160,220,0.3)",
+            }}
             transition={{ duration: 0.3 }}
           >
             <img
@@ -66,7 +69,9 @@ function GalleryFlores({ s }) {
               loading="lazy"
             />
           </motion.div>
-          <p className={`${s.bodyFont} text-xs tracking-wider ${s.textColor} uppercase`}>
+          <p
+            className={`${s.bodyFont} text-xs tracking-wider ${s.textColor} uppercase`}
+          >
             {p.caption}
           </p>
         </motion.div>

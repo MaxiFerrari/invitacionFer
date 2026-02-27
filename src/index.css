@@ -47,70 +47,157 @@
 
 /* ── Animaciones base ── */
 @keyframes gradient-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
 }
 @keyframes float-slow {
-  0%, 100% { transform: translateY(0px) scale(1); }
-  50% { transform: translateY(-30px) scale(1.05); }
+  0%,
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-30px) scale(1.05);
+  }
 }
 @keyframes glow-pulse {
-  0%, 100% { opacity: 0.4; filter: blur(8px); }
-  50% { opacity: 0.8; filter: blur(12px); }
+  0%,
+  100% {
+    opacity: 0.4;
+    filter: blur(8px);
+  }
+  50% {
+    opacity: 0.8;
+    filter: blur(12px);
+  }
 }
 @keyframes twinkle {
-  0%, 100% { opacity: 0.2; transform: scale(0.8); }
-  50% { opacity: 1; transform: scale(1.2); }
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
 }
 
 /* ── Animaciones Enredaderas (flores) ── */
 @keyframes vine-sway {
-  0%, 100% { transform: rotate(-0.5deg); }
-  50% { transform: rotate(0.5deg); }
+  0%,
+  100% {
+    transform: rotate(-0.5deg);
+  }
+  50% {
+    transform: rotate(0.5deg);
+  }
 }
 @keyframes sparkle-twinkle {
-  0%, 100% { opacity: 0; transform: scale(0.3); }
-  50% { opacity: 1; transform: scale(1); }
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* ── Animaciones Editorial (destellos al scroll) ── */
 @keyframes sparkle-fall {
-  0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 0.6; }
-  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0;
+  }
 }
 @keyframes gold-shimmer {
-  0%, 100% {
-    text-shadow: 0 0 20px rgba(183,110,121,0.3), 0 0 40px rgba(183,110,121,0.15);
+  0%,
+  100% {
+    text-shadow:
+      0 0 20px rgba(183, 110, 121, 0.3),
+      0 0 40px rgba(183, 110, 121, 0.15);
   }
   50% {
-    text-shadow: 0 0 40px rgba(183,110,121,0.5), 0 0 80px rgba(183,110,121,0.25), 0 0 120px rgba(183,110,121,0.1);
+    text-shadow:
+      0 0 40px rgba(183, 110, 121, 0.5),
+      0 0 80px rgba(183, 110, 121, 0.25),
+      0 0 120px rgba(183, 110, 121, 0.1);
   }
 }
 
 /* ── Animaciones Bruma (nubes lila) ── */
 @keyframes cloud-drift {
-  0% { transform: translateX(-5%) scaleX(1.1); opacity: 0.3; }
-  50% { transform: translateX(3%) scaleX(1); opacity: 0.5; }
-  100% { transform: translateX(-5%) scaleX(1.1); opacity: 0.3; }
+  0% {
+    transform: translateX(-5%) scaleX(1.1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateX(3%) scaleX(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(-5%) scaleX(1.1);
+    opacity: 0.3;
+  }
 }
 @keyframes cloud-drift-reverse {
-  0% { transform: translateX(5%) scaleX(1.2); opacity: 0.2; }
-  50% { transform: translateX(-4%) scaleX(1); opacity: 0.4; }
-  100% { transform: translateX(5%) scaleX(1.2); opacity: 0.2; }
+  0% {
+    transform: translateX(5%) scaleX(1.2);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translateX(-4%) scaleX(1);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateX(5%) scaleX(1.2);
+    opacity: 0.2;
+  }
 }
 @keyframes cloud-pulse {
-  0%, 100% { opacity: 0.15; transform: scale(1); }
-  50% { opacity: 0.3; transform: scale(1.05); }
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.05);
+  }
 }
 @keyframes polaroid-float {
-  0%, 100% { transform: translateY(0px) rotate(var(--rot)); }
-  50% { transform: translateY(-8px) rotate(calc(var(--rot) + 1deg)); }
+  0%,
+  100% {
+    transform: translateY(0px) rotate(var(--rot));
+  }
+  50% {
+    transform: translateY(-8px) rotate(calc(var(--rot) + 1deg));
+  }
 }
 
 /* ── Utilidades personalizadas ── */
@@ -135,13 +222,24 @@
 }
 
 /* ── Scrollbar elegante ── */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: var(--color-marfil); }
-::-webkit-scrollbar-thumb { background: var(--color-lila); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: var(--color-rosa-oro); }
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-marfil);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-lila);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-rosa-oro);
+}
 
 /* ── Estilos base ── */
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+}
 body {
   margin: 0;
   padding: 0;
@@ -152,7 +250,15 @@ body {
 /* ── Textura de papel artesanal (Diseño 1) ── */
 .bg-paper {
   background-image:
-    radial-gradient(ellipse at 20% 50%, rgba(201,160,220,0.03) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, rgba(183,110,121,0.03) 0%, transparent 50%),
+    radial-gradient(
+      ellipse at 20% 50%,
+      rgba(201, 160, 220, 0.03) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 80% 20%,
+      rgba(183, 110, 121, 0.03) 0%,
+      transparent 50%
+    ),
     url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
 }
