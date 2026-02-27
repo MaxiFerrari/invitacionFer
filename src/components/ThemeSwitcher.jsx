@@ -3,60 +3,104 @@ import { useTheme, THEMES } from "../context/ThemeContext";
 import { useState } from "react";
 
 const THEME_META = {
-  [THEMES.magico]: {
-    label: "Mágico",
-    emoji: "🌙",
-    description: "Noche de linternas",
-    bg: "bg-gradient-to-br from-noche to-morado",
-    ring: "ring-dorado/60",
-  },
-  [THEMES.castillo]: {
-    label: "Castillo Real",
-    emoji: "🏰",
-    description: "Blanco & Dorado",
+  [THEMES.encanto]: {
+    label: "Encanto Real",
+    description: "Moderno, sol dorado y lila",
     bg: "bg-gradient-to-br from-white to-purple-100",
     ring: "ring-amber-300",
+    accentColor: "#C9A0DC",
   },
-  [THEMES.amanecer]: {
-    label: "Amanecer",
-    emoji: "🌅",
-    description: "Glassmorphism rosado",
-    bg: "bg-gradient-to-br from-rose-100 to-purple-100",
-    ring: "ring-rose-300",
+  [THEMES.bosque]: {
+    label: "Bosque Susurrante",
+    description: "Bosque nocturno, neblina",
+    bg: "bg-gradient-to-br from-[#0d1f0d] to-[#1a3a1a]",
+    ring: "ring-amber-700/60",
+    accentColor: "#2d4a2d",
   },
-  [THEMES.jardin]: {
-    label: "Jardín de Flores",
-    emoji: "🌸",
-    description: "Acuarela botánica",
-    bg: "bg-gradient-to-br from-white to-purple-50",
-    ring: "ring-purple-300",
-  },
-  [THEMES.porcelana]: {
-    label: "Porcelana",
-    emoji: "🤍",
-    description: "Minimalismo violeta",
-    bg: "bg-gradient-to-br from-white to-violet-50",
-    ring: "ring-violet-300",
-  },
-  [THEMES.terciopelo]: {
-    label: "Terciopelo",
-    emoji: "👑",
-    description: "Lila intenso & rosa",
-    bg: "bg-gradient-to-br from-purple-800 to-fuchsia-900",
-    ring: "ring-pink-400/60",
-  },
-  [THEMES.ensueno]: {
-    label: "Ensueño",
-    emoji: "✨",
-    description: "Lila soñador pastel",
-    bg: "bg-gradient-to-br from-purple-300 to-fuchsia-200",
-    ring: "ring-purple-400",
+  [THEMES.luces]: {
+    label: "Noche de Luces",
+    description: "Cielo estrellado, faroles",
+    bg: "bg-gradient-to-br from-[#0a0a2e] to-[#1a1060]",
+    ring: "ring-dorado/60",
+    accentColor: "#1a0a2e",
   },
 };
 
+/** SVG de un farol antiguo (old lantern icon) */
+function LanternIcon({ className = "" }) {
+  return (
+    <svg
+      viewBox="0 0 32 40"
+      className={className}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Handle */}
+      <path
+        d="M12 4 C12 2, 20 2, 20 4"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        fill="none"
+      />
+      <line
+        x1="16"
+        y1="2"
+        x2="16"
+        y2="0"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      {/* Top cap */}
+      <rect
+        x="10"
+        y="5"
+        width="12"
+        height="3"
+        rx="1"
+        fill="currentColor"
+        opacity="0.8"
+      />
+      {/* Glass body */}
+      <path
+        d="M10 8 L8 30 Q8 33 16 33 Q24 33 24 30 L22 8 Z"
+        fill="currentColor"
+        opacity="0.3"
+        stroke="currentColor"
+        strokeWidth="1"
+      />
+      {/* Flame */}
+      <ellipse cx="16" cy="19" rx="3" ry="5" fill="#FFD700" opacity="0.9" />
+      <ellipse cx="16" cy="18" rx="1.5" ry="3" fill="#FFFACD" opacity="0.8" />
+      {/* Bottom cap */}
+      <rect
+        x="9"
+        y="33"
+        width="14"
+        height="3"
+        rx="1"
+        fill="currentColor"
+        opacity="0.8"
+      />
+      {/* Bottom ring */}
+      <ellipse
+        cx="16"
+        cy="38"
+        rx="4"
+        ry="1.5"
+        stroke="currentColor"
+        strokeWidth="1"
+        fill="none"
+        opacity="0.5"
+      />
+    </svg>
+  );
+}
+
 /**
  * FAB en la esquina inferior izquierda — Selector de Tema Visual.
- * Icono de varita mágica. Despliega un mini-menú con los 3 temas.
+ * Icono de farol antiguo. Despliega un mini-menú con los 3 diseños.
  */
 export default function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
@@ -77,7 +121,7 @@ export default function ThemeSwitcher() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.9 }}
             transition={{ duration: 0.25 }}
-            className="absolute bottom-20 left-0 flex flex-col gap-2 min-w-[180px]"
+            className="absolute bottom-20 left-0 flex flex-col gap-2 min-w-[200px]"
           >
             {Object.entries(THEME_META).map(([key, meta]) => (
               <motion.button
@@ -93,16 +137,18 @@ export default function ThemeSwitcher() {
                   border transition-all duration-300 backdrop-blur-md
                   ${
                     theme === key
-                      ? `${meta.bg} text-white border-white/30 shadow-lg ring-2 ${meta.ring}`
+                      ? `${meta.bg} ${key === "encanto" ? "text-purple-900" : "text-white"} border-white/30 shadow-lg ring-2 ${meta.ring}`
                       : "bg-white/80 text-purple-900 border-purple-200/50 hover:bg-white/90 hover:border-purple-300"
                   }
                 `}
               >
-                <span className="text-xl">{meta.emoji}</span>
+                <LanternIcon
+                  className={`w-5 h-7 flex-shrink-0 ${theme === key ? (key === "encanto" ? "text-amber-600" : "text-amber-300") : "text-purple-400"}`}
+                />
                 <div className="text-left">
                   <p className="font-semibold leading-tight">{meta.label}</p>
                   <p
-                    className={`text-xs ${theme === key ? "text-white/70" : "text-purple-400"}`}
+                    className={`text-xs ${theme === key ? (key === "encanto" ? "text-purple-500" : "text-white/60") : "text-purple-400"}`}
                   >
                     {meta.description}
                   </p>
@@ -114,7 +160,7 @@ export default function ThemeSwitcher() {
         )}
       </AnimatePresence>
 
-      {/* Botón principal (varita mágica) */}
+      {/* Botón principal (farol antiguo) */}
       <button
         onClick={() => setOpen(!open)}
         className={`
@@ -122,50 +168,44 @@ export default function ThemeSwitcher() {
           cursor-pointer outline-none focus:outline-none
           transition-all duration-500
           ${
-            theme === "magico"
-              ? "bg-gradient-to-br from-morado to-lila-dark shadow-[0_0_25px_rgba(106,13,173,0.5)]"
-              : theme === "castillo"
-                ? "bg-gradient-to-br from-white to-purple-100 shadow-xl border border-amber-200"
-                : theme === "jardin"
-                  ? "bg-gradient-to-br from-white to-purple-50 shadow-lg border border-purple-200/50"
-                  : theme === "porcelana"
-                    ? "bg-white shadow-lg border border-violet-200"
-                    : theme === "terciopelo"
-                      ? "bg-gradient-to-br from-purple-800 to-fuchsia-900 shadow-[0_0_25px_rgba(168,85,247,0.4)]"
-                      : theme === "ensueno"
-                        ? "bg-gradient-to-br from-purple-300 to-fuchsia-200 shadow-lg border border-purple-300/50"
-                        : "bg-gradient-to-br from-rose-200 to-purple-100 shadow-lg border border-rose-200/60"
+            theme === "encanto"
+              ? "bg-gradient-to-br from-white to-purple-100 shadow-xl border border-amber-200"
+              : theme === "bosque"
+                ? "bg-gradient-to-br from-[#1a3a1a] to-[#2d4a2d] shadow-[0_0_25px_rgba(45,74,45,0.5)] border border-amber-900/40"
+                : "bg-gradient-to-br from-morado to-noche shadow-[0_0_25px_rgba(106,13,173,0.5)] border border-dorado/30"
           }
         `}
         aria-label="Cambiar tema visual"
       >
-        {/* Icono varita mágica */}
-        <motion.span
-          animate={{ rotate: open ? 45 : 0 }}
+        <motion.div
+          animate={{ rotate: open ? 20 : 0 }}
           transition={{ duration: 0.3 }}
-          className="text-2xl"
         >
-          {open ? "✕" : "🪄"}
-        </motion.span>
+          {open ? (
+            <span className="text-2xl">✕</span>
+          ) : (
+            <LanternIcon
+              className={`w-6 h-8 ${
+                theme === "encanto"
+                  ? "text-purple-600"
+                  : theme === "bosque"
+                    ? "text-amber-400"
+                    : "text-dorado"
+              }`}
+            />
+          )}
+        </motion.div>
 
         {/* Glow ring */}
         <div
           className={`
           absolute inset-0 rounded-full transition-all duration-500
           ${
-            theme === "magico"
-              ? "shadow-[0_0_20px_rgba(201,160,220,0.4)]"
-              : theme === "castillo"
-                ? "shadow-[0_0_20px_rgba(217,180,60,0.3)]"
-                : theme === "jardin"
-                  ? "shadow-[0_0_20px_rgba(168,85,247,0.2)]"
-                  : theme === "porcelana"
-                    ? "shadow-[0_0_20px_rgba(139,92,246,0.2)]"
-                    : theme === "terciopelo"
-                      ? "shadow-[0_0_20px_rgba(236,72,153,0.35)]"
-                      : theme === "ensueno"
-                        ? "shadow-[0_0_20px_rgba(147,51,234,0.3)]"
-                        : "shadow-[0_0_20px_rgba(244,114,182,0.3)]"
+            theme === "encanto"
+              ? "shadow-[0_0_20px_rgba(217,180,60,0.3)]"
+              : theme === "bosque"
+                ? "shadow-[0_0_20px_rgba(200,255,100,0.2)]"
+                : "shadow-[0_0_20px_rgba(255,215,0,0.4)]"
           }
         `}
         />

@@ -1,4 +1,5 @@
 import FloatingLanterns from "./components/FloatingLanterns";
+import ForestBackground from "./components/ForestBackground";
 import HeroSection from "./components/HeroSection";
 import Countdown from "./components/Countdown";
 import PhotoGallery from "./components/PhotoGallery";
@@ -6,13 +7,15 @@ import MusicPlayer from "./components/MusicPlayer";
 import EventInfo from "./components/EventInfo";
 import Footer from "./components/Footer";
 import ThemeSwitcher from "./components/ThemeSwitcher";
-import { ThemeProvider, useTheme, themeStyles } from "./context/ThemeContext";
+import { ThemeProvider, useTheme, S } from "./context/ThemeContext";
 
 /**
  * Invitación Digital de XV Años — Temática Rapunzel (Enredados)
  *
- * Componente principal que orquesta todas las secciones de la invitación.
- * Soporta 3 temas: Mágico, Castillo Real, Amanecer en Corona.
+ * 3 diseños radicalmente diferentes:
+ *   • Encanto Real  — Moderno, limpio, sol dorado y lila
+ *   • El Bosque Susurrante — Bosque nocturno, neblina, luciérnagas
+ *   • La Noche de las Luces — Cielo estrellado, faroles, glassmorphism
  */
 export default function InvitacionXV() {
   return (
@@ -27,15 +30,14 @@ function InvitacionContent() {
 
   return (
     <div
-      className={`relative min-h-screen overflow-x-hidden transition-all duration-500 ${themeStyles.root[theme]}`}
+      className={`relative min-h-screen overflow-x-hidden transition-all duration-700 ${S.root[theme]}`}
     >
-      {/* Fondo: cielo nocturno + linternas (solo en tema mágico) */}
+      {/* Fondos temáticos */}
+      <ForestBackground />
       <FloatingLanterns count={30} />
 
-      {/* Reproductor de música flotante (FAB) — esquina derecha */}
+      {/* Controles flotantes */}
       <MusicPlayer />
-
-      {/* Selector de tema visual (FAB) — esquina izquierda */}
       <ThemeSwitcher />
 
       {/* Secciones */}
@@ -54,18 +56,20 @@ function InvitacionContent() {
   );
 }
 
-/** Separador decorativo reutilizable entre secciones */
+/** Separador decorativo — cambia icono por tema */
 function Separator() {
   const { theme } = useTheme();
 
   return (
     <div className="flex items-center justify-center gap-4 py-4 transition-all duration-500">
       <div
-        className={`w-16 md:w-24 h-[1px] ${themeStyles.separatorLine[theme]}`}
+        className={`w-16 md:w-24 h-[1px] ${S.separatorLine[theme]}`}
       />
-      <span className={`text-sm ${themeStyles.separatorStar[theme]}`}>✦</span>
+      <span className={`text-sm ${S.separatorStar[theme]}`}>
+        {S.separatorIcon[theme]}
+      </span>
       <div
-        className={`w-16 md:w-24 h-[1px] ${themeStyles.separatorLineReverse[theme]}`}
+        className={`w-16 md:w-24 h-[1px] ${S.separatorLineReverse[theme]}`}
       />
     </div>
   );

@@ -1,16 +1,20 @@
 @import "tailwindcss";
 
 /* ── Google Fonts (loaded in index.html) ── */
-/* Great Vibes — títulos mágicos */
+/* Great Vibes — títulos mágicos (encanto) */
+/* IM Fell English SC — serif envejecida (bosque) */
+/* Pinyon Script — caligrafía fina (luces) */
 /* Cormorant Garamond — texto elegante */
 /* Montserrat — cuerpo limpio */
 
 @theme {
   --font-fairy: "Great Vibes", cursive;
+  --font-forest: "IM Fell English SC", serif;
+  --font-calligraphy: "Pinyon Script", cursive;
   --font-elegant: "Cormorant Garamond", serif;
   --font-body: "Montserrat", sans-serif;
 
-  /* Paleta Rapunzel */
+  /* Paleta Rapunzel / Encanto */
   --color-lila: #c9a0dc;
   --color-lila-light: #e8d5f5;
   --color-lila-dark: #7b2d8e;
@@ -20,78 +24,80 @@
   --color-dorado-dark: #b8860b;
   --color-noche: #1a0a2e;
   --color-noche-light: #2d1b4e;
+
+  /* Paleta Bosque */
+  --color-bosque: #0d1f0d;
+  --color-bosque-mid: #1a3a1a;
+  --color-musgo: #2d4a2d;
+  --color-niebla: #b8c5b8;
+  --color-madera: #5c3a1e;
+  --color-madera-light: #8b6f47;
+
+  /* Paleta Luces */
+  --color-cielo: #0a0a2e;
+  --color-cielo-mid: #141450;
 }
 
-/* ── Animación de gradiente de fondo ── */
+/* ── Animaciones base ── */
 @keyframes gradient-shift {
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
-
 @keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
 }
-
 @keyframes float-slow {
-  0%,
-  100% {
-    transform: translateY(0px) scale(1);
-  }
-  50% {
-    transform: translateY(-30px) scale(1.05);
-  }
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-30px) scale(1.05); }
 }
-
 @keyframes glow-pulse {
-  0%,
-  100% {
-    opacity: 0.4;
-    filter: blur(8px);
-  }
-  50% {
-    opacity: 0.8;
-    filter: blur(12px);
-  }
+  0%, 100% { opacity: 0.4; filter: blur(8px); }
+  50% { opacity: 0.8; filter: blur(12px); }
 }
-
 @keyframes twinkle {
-  0%,
-  100% {
-    opacity: 0.2;
-    transform: scale(0.8);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.2);
-  }
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+@keyframes lantern-rise {
+  0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 0.8; }
+  100% { transform: translateY(-20vh) scale(1); opacity: 0; }
 }
 
-@keyframes lantern-rise {
-  0% {
-    transform: translateY(100vh) scale(0.5);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 0.8;
-  }
-  100% {
-    transform: translateY(-20vh) scale(1);
-    opacity: 0;
-  }
+/* ── Animaciones Bosque ── */
+@keyframes firefly {
+  0%, 100% { opacity: 0; transform: translate(0, 0) scale(0.5); }
+  20% { opacity: 1; transform: translate(15px, -20px) scale(1); }
+  50% { opacity: 0.6; transform: translate(-10px, -50px) scale(0.8); }
+  80% { opacity: 1; transform: translate(20px, -30px) scale(1.1); }
+}
+@keyframes fog-drift {
+  0% { transform: translateX(-10%) scaleX(1.2); opacity: 0.15; }
+  50% { transform: translateX(5%) scaleX(1); opacity: 0.25; }
+  100% { transform: translateX(-10%) scaleX(1.2); opacity: 0.15; }
+}
+@keyframes fog-drift-reverse {
+  0% { transform: translateX(10%) scaleX(1.1); opacity: 0.1; }
+  50% { transform: translateX(-8%) scaleX(1.3); opacity: 0.2; }
+  100% { transform: translateX(10%) scaleX(1.1); opacity: 0.1; }
+}
+@keyframes vine-sway {
+  0%, 100% { transform: rotate(-1deg); }
+  50% { transform: rotate(1deg); }
+}
+
+/* ── Animaciones Luces ── */
+@keyframes sparkle-fall {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 0.8; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+@keyframes golden-pulse {
+  0%, 100% { text-shadow: 0 0 20px rgba(255,215,0,0.4), 0 0 40px rgba(255,215,0,0.2); }
+  50% { text-shadow: 0 0 40px rgba(255,215,0,0.7), 0 0 80px rgba(255,215,0,0.4), 0 0 120px rgba(255,215,0,0.15); }
 }
 
 /* ── Utilidades personalizadas ── */
@@ -99,46 +105,30 @@
   background-size: 400% 400%;
   animation: gradient-shift 15s ease infinite;
 }
-
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
-
 .animate-float-slow {
   animation: float-slow 8s ease-in-out infinite;
 }
-
 .animate-glow {
   animation: glow-pulse 3s ease-in-out infinite;
 }
-
 .animate-twinkle {
   animation: twinkle 2s ease-in-out infinite;
 }
+.animate-golden-pulse {
+  animation: golden-pulse 4s ease-in-out infinite;
+}
 
 /* ── Scrollbar elegante ── */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--color-noche);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-lila);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-morado);
-}
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--color-noche); }
+::-webkit-scrollbar-thumb { background: var(--color-lila); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-morado); }
 
 /* ── Estilos base ── */
-html {
-  scroll-behavior: smooth;
-}
-
+html { scroll-behavior: smooth; }
 body {
   margin: 0;
   padding: 0;

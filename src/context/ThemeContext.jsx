@@ -1,32 +1,31 @@
 import { createContext, useContext, useState } from "react";
 
 /**
- * Siete temas visuales para la invitación:
- * - magico:     Fondo oscuro, linternas, degradados morados (original)
- * - castillo:   Blanco editorial minimalista, bordes dorados finos, sombras suaves
- * - amanecer:   Glassmorphism, gradiente blanco→lila pastel, oro rosa, cristal
- * - jardin:     Blanco acuarela botánico, acentos lavanda suaves, estilo watercolor
- * - porcelana:  Blanco puro con violeta frío, líneas finas, estilo high-fashion
- * - terciopelo: Fondo lila intenso, textura terciopelo, acentos crema/oro rosa
- * - ensueno:    Gradiente lila soñador, glassmorphism lavanda, todo respira lila
+ * 3 diseños radicalmente diferentes:
+ *
+ * encanto  → "Encanto Real": Limpio, moderno, sol dorado y lila, layout tradicional.
+ *             Tipografía: Great Vibes + Cormorant Garamond + Montserrat
+ *
+ * bosque   → "El Bosque Susurrante": Fotorrealista, bosque nocturno con neblina
+ *             y luciérnagas, marcos de ramas, layout orgánico/disperso.
+ *             Tipografía: IM Fell English SC + Montserrat
+ *
+ * luces    → "La Noche de las Luces": Cielo estrellado con faroles flotantes,
+ *             glassmorphism, destellos dorados, layout centralizado etéreo.
+ *             Tipografía: Pinyon Script + Cormorant Garamond + Montserrat
  */
 export const THEMES = {
-  magico: "magico",
-  castillo: "castillo",
-  amanecer: "amanecer",
-  jardin: "jardin",
-  porcelana: "porcelana",
-  terciopelo: "terciopelo",
-  ensueno: "ensueno",
+  encanto: "encanto",
+  bosque: "bosque",
+  luces: "luces",
 };
 
-/** Orden cíclico para el botón */
-const THEME_ORDER = [THEMES.magico, THEMES.castillo, THEMES.amanecer, THEMES.jardin, THEMES.porcelana, THEMES.terciopelo, THEMES.ensueno];
+const THEME_ORDER = [THEMES.encanto, THEMES.bosque, THEMES.luces];
 
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(THEMES.magico);
+  const [theme, setTheme] = useState(THEMES.encanto);
 
   const cycleTheme = () => {
     setTheme((prev) => {
@@ -49,391 +48,304 @@ export function useTheme() {
 }
 
 /* ─────────────────────────────────────────────
-   Mapas de clases por tema (reutilizables)
+   Configuración de diseño por tema
    ───────────────────────────────────────────── */
 
-export const themeStyles = {
-  /* ── Contenedor raíz ── */
+/** Fuentes por tema */
+export const fonts = {
+  title: {
+    encanto: "font-fairy",
+    bosque: "font-forest",
+    luces: "font-calligraphy",
+  },
+  heading: {
+    encanto: "font-elegant",
+    bosque: "font-forest",
+    luces: "font-elegant",
+  },
+  body: {
+    encanto: "font-body",
+    bosque: "font-body",
+    luces: "font-body",
+  },
+};
+
+/** Mapa completo de estilos por tema */
+export const S = {
+  /* ── Raíz ── */
   root: {
-    magico: "bg-noche text-white",
-    castillo: "bg-slate-50 text-purple-900",
-    amanecer: "bg-gradient-to-tr from-white via-purple-50 to-white text-purple-900",
-    jardin: "bg-gradient-to-b from-white via-lavender-50 to-green-50/20 text-stone-800",
-    porcelana: "bg-white text-violet-950",
-    terciopelo: "bg-gradient-to-b from-purple-900 via-purple-800 to-fuchsia-900 text-purple-50",
-    ensueno: "bg-gradient-to-br from-purple-200 via-fuchsia-100 to-purple-300 text-purple-950",
+    encanto: "bg-gradient-to-b from-slate-50 via-purple-50/50 to-white text-purple-900",
+    bosque: "bg-bosque text-amber-50",
+    luces: "bg-cielo text-white",
   },
 
-  /* ── Títulos fairy (Great Vibes) ── */
-  titleFairy: {
-    magico: "text-dorado drop-shadow-[0_0_40px_rgba(255,215,0,0.3)]",
-    castillo: "text-purple-800 drop-shadow-none",
-    amanecer: "text-rose-400 drop-shadow-[0_0_20px_rgba(244,114,182,0.3)]",
-    jardin: "text-purple-400 drop-shadow-[0_0_15px_rgba(168,85,247,0.15)]",
-    porcelana: "text-violet-700 drop-shadow-none",
-    terciopelo: "text-pink-200 drop-shadow-[0_0_30px_rgba(236,72,153,0.3)]",
-    ensueno: "text-purple-700 drop-shadow-[0_0_25px_rgba(147,51,234,0.25)]",
+  /* ── Títulos principales ── */
+  titleMain: {
+    encanto: "text-purple-800 drop-shadow-none",
+    bosque: "text-amber-200 drop-shadow-[0_0_30px_rgba(255,215,0,0.2)]",
+    luces: "text-dorado animate-golden-pulse",
   },
 
-  /* ── Títulos de sección (fairy más pequeños) ── */
   sectionTitle: {
-    magico: "text-dorado",
-    castillo: "text-purple-800",
-    amanecer: "text-rose-400",
-    jardin: "text-purple-400",
-    porcelana: "text-violet-700",
-    terciopelo: "text-pink-200",
-    ensueno: "text-purple-700",
+    encanto: "text-purple-800",
+    bosque: "text-amber-300/90",
+    luces: "text-dorado",
   },
 
-  /* ── Subtítulos elegant ── */
+  /* ── Subtítulos ── */
   subtitle: {
-    magico: "text-lila-light",
-    castillo: "text-purple-600",
-    amanecer: "text-purple-400",
-    jardin: "text-stone-500",
-    porcelana: "text-violet-400",
-    terciopelo: "text-purple-200",
-    ensueno: "text-purple-600",
+    encanto: "text-purple-600",
+    bosque: "text-niebla/80",
+    luces: "text-lila-light/90",
   },
 
   subtitleMuted: {
-    magico: "text-lila-light/60",
-    castillo: "text-purple-400",
-    amanecer: "text-purple-300",
-    jardin: "text-stone-400",
-    porcelana: "text-violet-300",
-    terciopelo: "text-purple-300/60",
-    ensueno: "text-purple-400",
+    encanto: "text-purple-400",
+    bosque: "text-niebla/50",
+    luces: "text-lila-light/60",
   },
 
   /* ── Texto de cuerpo ── */
   bodyText: {
-    magico: "text-lila-light/80",
-    castillo: "text-purple-700",
-    amanecer: "text-purple-600",
-    jardin: "text-stone-600",
-    porcelana: "text-violet-800",
-    terciopelo: "text-purple-100/90",
-    ensueno: "text-purple-800",
+    encanto: "text-purple-700",
+    bosque: "text-amber-100/80",
+    luces: "text-lila-light/80",
   },
 
   bodyMuted: {
-    magico: "text-lila-light/50",
-    castillo: "text-purple-400",
-    amanecer: "text-purple-300",
-    jardin: "text-stone-400",
-    porcelana: "text-violet-300",
-    terciopelo: "text-purple-300/50",
-    ensueno: "text-purple-400",
+    encanto: "text-purple-400",
+    bosque: "text-niebla/40",
+    luces: "text-lila-light/50",
   },
 
   /* ── Líneas decorativas ── */
   decorLine: {
-    magico: "bg-gradient-to-r from-transparent via-dorado to-transparent",
-    castillo: "bg-gradient-to-r from-transparent via-amber-300 to-transparent",
-    amanecer: "bg-gradient-to-r from-transparent via-rose-300 to-transparent",
-    jardin: "bg-gradient-to-r from-transparent via-purple-200 to-transparent",
-    porcelana: "bg-gradient-to-r from-transparent via-violet-200 to-transparent",
-    terciopelo: "bg-gradient-to-r from-transparent via-pink-300/60 to-transparent",
-    ensueno: "bg-gradient-to-r from-transparent via-purple-400 to-transparent",
+    encanto: "bg-gradient-to-r from-transparent via-amber-300 to-transparent",
+    bosque: "bg-gradient-to-r from-transparent via-amber-700/40 to-transparent",
+    luces: "bg-gradient-to-r from-transparent via-dorado/60 to-transparent",
   },
 
   decorLineLila: {
-    magico: "bg-gradient-to-r from-transparent via-lila to-transparent",
-    castillo: "bg-gradient-to-r from-transparent via-purple-300 to-transparent",
-    amanecer: "bg-gradient-to-r from-transparent via-rose-200 to-transparent",
-    jardin: "bg-gradient-to-r from-transparent via-green-200/60 to-transparent",
-    porcelana: "bg-gradient-to-r from-transparent via-violet-100 to-transparent",
-    terciopelo: "bg-gradient-to-r from-transparent via-fuchsia-400/50 to-transparent",
-    ensueno: "bg-gradient-to-r from-transparent via-purple-300 to-transparent",
+    encanto: "bg-gradient-to-r from-transparent via-purple-300 to-transparent",
+    bosque: "bg-gradient-to-r from-transparent via-musgo/40 to-transparent",
+    luces: "bg-gradient-to-r from-transparent via-lila/40 to-transparent",
   },
 
   /* ── Cards ── */
   card: {
-    magico: "border-lila/20 bg-noche/40 backdrop-blur-md hover:border-dorado/40",
-    castillo: "border-amber-200 bg-white shadow-xl hover:border-amber-400 hover:shadow-2xl",
-    amanecer: "border-white/40 bg-white/60 backdrop-blur-md shadow-lg hover:border-rose-300 hover:shadow-xl",
-    jardin: "border-purple-100 bg-white/90 shadow-md hover:border-purple-200 hover:shadow-lg",
-    porcelana: "border-violet-100 bg-white shadow-[0_1px_3px_rgba(139,92,246,0.08)] hover:border-violet-300 hover:shadow-[0_4px_20px_rgba(139,92,246,0.1)]",
-    terciopelo: "border-pink-400/30 bg-purple-900/50 backdrop-blur-lg hover:border-pink-300/60 shadow-[0_0_20px_rgba(168,85,247,0.15)]",
-    ensueno: "border-purple-300/50 bg-white/50 backdrop-blur-lg shadow-lg hover:border-purple-400 hover:shadow-[0_8px_30px_rgba(147,51,234,0.15)]",
+    encanto: "border-amber-200 bg-white shadow-xl hover:border-amber-400 hover:shadow-2xl rounded-2xl",
+    bosque: "border-amber-900/40 bg-bosque/70 backdrop-blur-sm shadow-[0_0_25px_rgba(0,0,0,0.4)] hover:border-amber-700/60 rounded-xl",
+    luces: "border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_0_30px_rgba(255,215,0,0.08)] hover:border-dorado/30 hover:shadow-[0_0_40px_rgba(255,215,0,0.15)] rounded-2xl",
   },
 
   cardHoverOverlay: {
-    magico: "bg-gradient-to-br from-dorado/5 to-transparent",
-    castillo: "bg-gradient-to-br from-amber-50 to-transparent",
-    amanecer: "bg-gradient-to-br from-rose-50/50 to-transparent",
-    jardin: "bg-gradient-to-br from-purple-50/40 to-transparent",
-    porcelana: "bg-gradient-to-br from-violet-50/30 to-transparent",
-    terciopelo: "bg-gradient-to-br from-pink-400/10 to-transparent",
-    ensueno: "bg-gradient-to-br from-purple-200/30 to-transparent",
+    encanto: "bg-gradient-to-br from-amber-50 to-transparent",
+    bosque: "bg-gradient-to-br from-amber-900/10 to-transparent",
+    luces: "bg-gradient-to-br from-dorado/5 to-transparent",
   },
 
   cardTitle: {
-    magico: "text-dorado",
-    castillo: "text-purple-800",
-    amanecer: "text-rose-500",
-    jardin: "text-purple-500",
-    porcelana: "text-violet-700",
-    terciopelo: "text-pink-200",
-    ensueno: "text-purple-700",
+    encanto: "text-purple-800",
+    bosque: "text-amber-300",
+    luces: "text-dorado",
   },
 
   cardIcon: {
-    magico: "text-dorado/70",
-    castillo: "text-amber-500",
-    amanecer: "text-rose-400",
-    jardin: "text-purple-300",
-    porcelana: "text-violet-400",
-    terciopelo: "text-pink-300/70",
-    ensueno: "text-purple-400",
+    encanto: "text-amber-500",
+    bosque: "text-amber-600/70",
+    luces: "text-dorado/70",
   },
 
-  /* ── Countdown units ── */
+  /* ── Countdown ── */
   countdownUnit: {
-    magico: "border-dorado/30 bg-noche/60 backdrop-blur-md shadow-[0_0_20px_rgba(255,215,0,0.1)]",
-    castillo: "border-amber-200 bg-white shadow-xl",
-    amanecer: "border-white/50 bg-white/60 backdrop-blur-md shadow-lg",
-    jardin: "border-purple-100 bg-white/80 shadow-sm",
-    porcelana: "border-violet-100 bg-white shadow-[0_1px_4px_rgba(139,92,246,0.06)]",
-    terciopelo: "border-pink-400/30 bg-purple-800/60 backdrop-blur-md shadow-[0_0_20px_rgba(236,72,153,0.12)]",
-    ensueno: "border-purple-300/40 bg-white/40 backdrop-blur-lg shadow-md",
+    encanto: "border-amber-200 bg-white shadow-xl rounded-2xl",
+    bosque: "border-amber-900/30 bg-bosque/60 backdrop-blur-sm shadow-lg rounded-xl",
+    luces: "border-dorado/20 bg-white/5 backdrop-blur-xl shadow-[0_0_20px_rgba(255,215,0,0.08)] rounded-2xl",
   },
 
   countdownGlow: {
-    magico: "bg-dorado/10",
-    castillo: "bg-amber-100/50",
-    amanecer: "bg-rose-100/50",
-    jardin: "bg-purple-50/60",
-    porcelana: "bg-violet-50/30",
-    terciopelo: "bg-pink-400/10",
-    ensueno: "bg-purple-300/20",
+    encanto: "bg-amber-100/50",
+    bosque: "bg-amber-700/10",
+    luces: "bg-dorado/10",
   },
 
   countdownValue: {
-    magico: "text-dorado",
-    castillo: "text-purple-800",
-    amanecer: "text-rose-500",
-    jardin: "text-purple-400",
-    porcelana: "text-violet-700",
-    terciopelo: "text-pink-200",
-    ensueno: "text-purple-700",
+    encanto: "text-purple-800",
+    bosque: "text-amber-200",
+    luces: "text-dorado",
   },
 
   countdownLabel: {
-    magico: "text-lila-light/70",
-    castillo: "text-purple-400",
-    amanecer: "text-purple-300",
-    jardin: "text-stone-400",
-    porcelana: "text-violet-300",
-    terciopelo: "text-purple-200/70",
-    ensueno: "text-purple-400",
+    encanto: "text-purple-400",
+    bosque: "text-niebla/50",
+    luces: "text-lila-light/60",
   },
 
   /* ── Gallery ── */
   galleryOverlay: {
-    magico: "from-dorado/40",
-    castillo: "from-amber-400/30",
-    amanecer: "from-rose-300/30",
-    jardin: "from-purple-300/25",
-    porcelana: "from-violet-400/20",
-    terciopelo: "from-pink-500/35",
-    ensueno: "from-purple-500/30",
+    encanto: "from-amber-400/30",
+    bosque: "from-amber-900/50",
+    luces: "from-dorado/40",
   },
 
   galleryBorderHover: {
-    magico: "border-dorado/0 group-hover:border-dorado/60 shadow-[inset_0_0_0_0_rgba(255,215,0,0)] group-hover:shadow-[inset_0_0_30px_rgba(255,215,0,0.15)]",
-    castillo: "border-transparent group-hover:border-amber-300 shadow-none group-hover:shadow-2xl",
-    amanecer: "border-transparent group-hover:border-rose-300/60 shadow-none group-hover:shadow-[inset_0_0_20px_rgba(244,114,182,0.1)]",
-    jardin: "border-transparent group-hover:border-purple-200 shadow-none group-hover:shadow-lg",
-    porcelana: "border-transparent group-hover:border-violet-200 shadow-none group-hover:shadow-[0_8px_30px_rgba(139,92,246,0.12)]",
-    terciopelo: "border-pink-400/0 group-hover:border-pink-300/60 shadow-none group-hover:shadow-[inset_0_0_25px_rgba(236,72,153,0.15)]",
-    ensueno: "border-transparent group-hover:border-purple-400/60 shadow-none group-hover:shadow-[inset_0_0_25px_rgba(147,51,234,0.12)]",
+    encanto: "border-transparent group-hover:border-amber-300 shadow-none group-hover:shadow-2xl",
+    bosque: "border-transparent group-hover:border-amber-700/50 shadow-none group-hover:shadow-[inset_0_0_20px_rgba(139,69,19,0.2)]",
+    luces: "border-dorado/0 group-hover:border-dorado/50 shadow-none group-hover:shadow-[inset_0_0_30px_rgba(255,215,0,0.12)]",
   },
 
   galleryCard: {
-    magico: "rounded-xl",
-    castillo: "rounded-2xl shadow-lg",
-    amanecer: "rounded-2xl",
-    jardin: "rounded-3xl shadow-sm",
-    porcelana: "rounded-lg",
-    terciopelo: "rounded-xl shadow-lg",
-    ensueno: "rounded-2xl shadow-md",
+    encanto: "rounded-2xl shadow-lg",
+    bosque: "rounded-lg shadow-md",
+    luces: "rounded-xl",
   },
 
   lightboxBg: {
-    magico: "bg-noche/90 backdrop-blur-md",
-    castillo: "bg-black/60 backdrop-blur-sm",
-    amanecer: "bg-purple-900/40 backdrop-blur-lg",
-    jardin: "bg-white/80 backdrop-blur-xl",
-    porcelana: "bg-violet-950/50 backdrop-blur-md",
-    terciopelo: "bg-purple-950/85 backdrop-blur-lg",
-    ensueno: "bg-purple-400/40 backdrop-blur-xl",
+    encanto: "bg-black/60 backdrop-blur-sm",
+    bosque: "bg-bosque/90 backdrop-blur-lg",
+    luces: "bg-cielo/90 backdrop-blur-md",
   },
 
-  /* ── WhatsApp Button ── */
+  lightboxClose: {
+    encanto: "bg-purple-600 text-white hover:bg-amber-400 hover:text-purple-900 border-amber-300",
+    bosque: "bg-amber-800 text-amber-100 hover:bg-amber-600 border-amber-600/40",
+    luces: "bg-morado text-white hover:bg-dorado hover:text-noche border-dorado/40",
+  },
+
+  lightboxCaption: {
+    encanto: "text-white",
+    bosque: "text-amber-200",
+    luces: "text-lila-light",
+  },
+
+  lightboxShadow: {
+    encanto: "shadow-2xl",
+    bosque: "shadow-[0_0_40px_rgba(139,69,19,0.3)]",
+    luces: "shadow-[0_0_60px_rgba(255,215,0,0.2)]",
+  },
+
+  galleryCaptionText: {
+    encanto: "text-purple-900",
+    bosque: "text-amber-100",
+    luces: "text-white",
+  },
+
+  /* ── WhatsApp ── */
   whatsappBg: {
-    magico: "bg-gradient-to-r from-lila via-dorado to-lila",
-    castillo: "bg-gradient-to-r from-purple-600 via-amber-400 to-purple-600",
-    amanecer: "bg-gradient-to-r from-rose-400 via-amber-300 to-rose-400",
-    jardin: "bg-gradient-to-r from-purple-300 via-purple-400 to-purple-300",
-    porcelana: "bg-gradient-to-r from-violet-500 via-violet-600 to-violet-500",
-    terciopelo: "bg-gradient-to-r from-pink-500 via-fuchsia-500 to-pink-500",
-    ensueno: "bg-gradient-to-r from-purple-500 via-fuchsia-400 to-purple-500",
+    encanto: "bg-gradient-to-r from-purple-600 via-amber-400 to-purple-600",
+    bosque: "bg-gradient-to-r from-amber-800 via-amber-600 to-amber-800",
+    luces: "bg-gradient-to-r from-lila via-dorado to-lila",
   },
 
   whatsappInner: {
-    magico: "bg-gradient-to-r from-lila via-dorado to-dorado-soft",
-    castillo: "bg-gradient-to-r from-purple-500 via-amber-300 to-amber-400",
-    amanecer: "bg-gradient-to-r from-rose-300 via-amber-200 to-rose-300",
-    jardin: "bg-gradient-to-r from-purple-300 via-purple-400 to-purple-300",
-    porcelana: "bg-gradient-to-r from-violet-500 via-violet-600 to-violet-500",
-    terciopelo: "bg-gradient-to-r from-pink-500 via-fuchsia-500 to-pink-500",
-    ensueno: "bg-gradient-to-r from-purple-500 via-fuchsia-400 to-purple-500",
+    encanto: "bg-gradient-to-r from-purple-500 via-amber-300 to-amber-400",
+    bosque: "bg-gradient-to-r from-amber-700 via-amber-500 to-amber-700",
+    luces: "bg-gradient-to-r from-lila via-dorado to-dorado-soft",
   },
 
-  /* ── Footer ── */
-  footerBorder: {
-    magico: "border-lila/10",
-    castillo: "border-purple-100",
-    amanecer: "border-rose-100",
-    jardin: "border-purple-50",
-    porcelana: "border-violet-100",
-    terciopelo: "border-pink-400/20",
-    ensueno: "border-purple-300/30",
+  whatsappText: {
+    encanto: "text-white",
+    bosque: "text-amber-50",
+    luces: "text-noche",
   },
 
-  footerQuote: {
-    magico: "text-lila-light/50",
-    castillo: "text-purple-400",
-    amanecer: "text-purple-300",
-    jardin: "text-stone-400",
-    porcelana: "text-violet-300",
-    terciopelo: "text-purple-200/50",
-    ensueno: "text-purple-500",
+  whatsappGlow: {
+    encanto: "hover:shadow-[0_0_30px_rgba(147,51,234,0.3)]",
+    bosque: "hover:shadow-[0_0_30px_rgba(139,69,19,0.4)]",
+    luces: "hover:shadow-[0_0_40px_rgba(255,215,0,0.4)]",
   },
 
-  footerName: {
-    magico: "text-dorado/60",
-    castillo: "text-purple-700",
-    amanecer: "text-rose-400/70",
-    jardin: "text-purple-300",
-    porcelana: "text-violet-500",
-    terciopelo: "text-pink-200/60",
-    ensueno: "text-purple-600",
-  },
-
-  footerYear: {
-    magico: "text-lila-light/30",
-    castillo: "text-purple-300",
-    amanecer: "text-purple-200",
-    jardin: "text-stone-300",
-    porcelana: "text-violet-200",
-    terciopelo: "text-purple-300/30",
-    ensueno: "text-purple-300",
-  },
-
-  footerDecorStar: {
-    magico: "text-dorado/40",
-    castillo: "text-amber-300",
-    amanecer: "text-rose-300",
-    jardin: "text-purple-200",
-    porcelana: "text-violet-200",
-    terciopelo: "text-pink-300/40",
-    ensueno: "text-purple-400",
-  },
-
-  footerDecorLine: {
-    magico: "bg-dorado/30",
-    castillo: "bg-amber-200",
-    amanecer: "bg-rose-200",
-    jardin: "bg-purple-100",
-    porcelana: "bg-violet-100",
-    terciopelo: "bg-pink-400/30",
-    ensueno: "bg-purple-400/40",
-  },
-
-  /* ── Separadores ── */
-  separatorLine: {
-    magico: "bg-gradient-to-r from-transparent to-dorado/30",
-    castillo: "bg-gradient-to-r from-transparent to-amber-200",
-    amanecer: "bg-gradient-to-r from-transparent to-rose-200",
-    jardin: "bg-gradient-to-r from-transparent to-purple-100",
-    porcelana: "bg-gradient-to-r from-transparent to-violet-100",
-    terciopelo: "bg-gradient-to-r from-transparent to-pink-400/30",
-    ensueno: "bg-gradient-to-r from-transparent to-purple-400/40",
-  },
-
-  separatorLineReverse: {
-    magico: "bg-gradient-to-l from-transparent to-dorado/30",
-    castillo: "bg-gradient-to-l from-transparent to-amber-200",
-    amanecer: "bg-gradient-to-l from-transparent to-rose-200",
-    jardin: "bg-gradient-to-l from-transparent to-purple-100",
-    porcelana: "bg-gradient-to-l from-transparent to-violet-100",
-    terciopelo: "bg-gradient-to-l from-transparent to-pink-400/30",
-    ensueno: "bg-gradient-to-l from-transparent to-purple-400/40",
-  },
-
-  separatorStar: {
-    magico: "text-dorado/40",
-    castillo: "text-amber-300",
-    amanecer: "text-rose-300",
-    jardin: "text-purple-200",
-    porcelana: "text-violet-200",
-    terciopelo: "text-pink-300/40",
-    ensueno: "text-purple-400",
+  whatsappNote: {
+    encanto: "text-purple-300",
+    bosque: "text-niebla/30",
+    luces: "text-lila-light/40",
   },
 
   /* ── Dress code ── */
   dressCode: {
-    magico: "text-lila-light/70",
-    castillo: "text-purple-600",
-    amanecer: "text-purple-400",
-    jardin: "text-stone-500",
-    porcelana: "text-violet-600",
-    terciopelo: "text-purple-200/70",
-    ensueno: "text-purple-600",
+    encanto: "text-purple-600",
+    bosque: "text-niebla/70",
+    luces: "text-lila-light/70",
   },
 
   dressCodeHighlight: {
-    magico: "text-dorado font-semibold",
-    castillo: "text-amber-600 font-semibold",
-    amanecer: "text-rose-500 font-semibold",
-    jardin: "text-purple-500 font-semibold",
-    porcelana: "text-violet-700 font-semibold",
-    terciopelo: "text-pink-200 font-semibold",
-    ensueno: "text-purple-700 font-semibold",
+    encanto: "text-amber-600 font-semibold",
+    bosque: "text-amber-300 font-semibold",
+    luces: "text-dorado font-semibold",
   },
 
   dressCodeNote: {
-    magico: "text-lila-light/50",
-    castillo: "text-purple-400",
-    amanecer: "text-purple-300",
-    jardin: "text-stone-400",
-    porcelana: "text-violet-300",
-    terciopelo: "text-purple-300/50",
-    ensueno: "text-purple-400",
+    encanto: "text-purple-400",
+    bosque: "text-niebla/40",
+    luces: "text-lila-light/50",
   },
 
-  whatsappNote: {
-    magico: "text-lila-light/40",
-    castillo: "text-purple-300",
-    amanecer: "text-purple-200",
-    jardin: "text-stone-300",
-    porcelana: "text-violet-200",
-    terciopelo: "text-purple-300/40",
-    ensueno: "text-purple-300",
+  /* ── Footer ── */
+  footerBorder: {
+    encanto: "border-purple-100",
+    bosque: "border-amber-900/20",
+    luces: "border-lila/10",
+  },
+
+  footerQuote: {
+    encanto: "text-purple-400",
+    bosque: "text-niebla/50",
+    luces: "text-lila-light/50",
+  },
+
+  footerName: {
+    encanto: "text-purple-700",
+    bosque: "text-amber-300/60",
+    luces: "text-dorado/60",
+  },
+
+  footerYear: {
+    encanto: "text-purple-300",
+    bosque: "text-niebla/30",
+    luces: "text-lila-light/30",
+  },
+
+  footerDecorStar: {
+    encanto: "text-amber-300",
+    bosque: "text-amber-700/40",
+    luces: "text-dorado/40",
+  },
+
+  footerDecorLine: {
+    encanto: "bg-amber-200",
+    bosque: "bg-amber-800/30",
+    luces: "bg-dorado/30",
+  },
+
+  /* ── Separadores ── */
+  separatorLine: {
+    encanto: "bg-gradient-to-r from-transparent to-amber-200",
+    bosque: "bg-gradient-to-r from-transparent to-amber-800/30",
+    luces: "bg-gradient-to-r from-transparent to-dorado/30",
+  },
+
+  separatorLineReverse: {
+    encanto: "bg-gradient-to-l from-transparent to-amber-200",
+    bosque: "bg-gradient-to-l from-transparent to-amber-800/30",
+    luces: "bg-gradient-to-l from-transparent to-dorado/30",
+  },
+
+  separatorStar: {
+    encanto: "text-amber-300",
+    bosque: "text-amber-700/40",
+    luces: "text-dorado/40",
+  },
+
+  separatorIcon: {
+    encanto: "✦",
+    bosque: "🌿",
+    luces: "✦",
   },
 
   /* ── Scroll arrow ── */
   scrollArrow: {
-    magico: "text-dorado/60",
-    castillo: "text-purple-300",
-    amanecer: "text-rose-300",
-    jardin: "text-purple-200",
-    porcelana: "text-violet-300",
-    terciopelo: "text-pink-300/60",
-    ensueno: "text-purple-400",
+    encanto: "text-purple-300",
+    bosque: "text-amber-600/50",
+    luces: "text-dorado/60",
   },
 };
