@@ -21,9 +21,11 @@ export default function FloatingLanterns({ count = 25 }) {
   }, [count]);
 
   return (
-    <div className={`fixed inset-0 overflow-hidden pointer-events-none z-0 transition-opacity duration-700 ${
-      theme === 'magico' ? 'opacity-100' : 'opacity-0'
-    }`}>
+    <div
+      className={`fixed inset-0 overflow-hidden pointer-events-none z-0 transition-opacity duration-700 ${
+        theme === "magico" ? "opacity-100" : "opacity-0"
+      }`}
+    >
       {/* Cielo con gradiente animado */}
       <div className="absolute inset-0 bg-gradient-to-b from-noche via-noche-light to-morado/40 animate-gradient" />
 

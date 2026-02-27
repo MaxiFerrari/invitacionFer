@@ -26,7 +26,9 @@ function InvitacionContent() {
   const { theme } = useTheme();
 
   return (
-    <div className={`relative min-h-screen overflow-x-hidden transition-all duration-500 ${themeStyles.root[theme]}`}>
+    <div
+      className={`relative min-h-screen overflow-x-hidden transition-all duration-500 ${themeStyles.root[theme]}`}
+    >
       {/* Fondo: cielo nocturno + linternas (solo en tema mágico) */}
       <FloatingLanterns count={30} />
 
@@ -58,9 +60,13 @@ function Separator() {
 
   return (
     <div className="flex items-center justify-center gap-4 py-4 transition-all duration-500">
-      <div className={`w-16 md:w-24 h-[1px] ${themeStyles.separatorLine[theme]}`} />
+      <div
+        className={`w-16 md:w-24 h-[1px] ${themeStyles.separatorLine[theme]}`}
+      />
       <span className={`text-sm ${themeStyles.separatorStar[theme]}`}>✦</span>
-      <div className={`w-16 md:w-24 h-[1px] ${themeStyles.separatorLineReverse[theme]}`} />
+      <div
+        className={`w-16 md:w-24 h-[1px] ${themeStyles.separatorLineReverse[theme]}`}
+      />
     </div>
   );
 }

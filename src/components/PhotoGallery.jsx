@@ -60,13 +60,19 @@ export default function PhotoGallery() {
       >
         {/* Título */}
         <div className="text-center mb-14">
-          <h2 className={`font-fairy text-4xl md:text-5xl mb-2 transition-colors duration-500 ${themeStyles.sectionTitle[theme]}`}>
+          <h2
+            className={`font-fairy text-4xl md:text-5xl mb-2 transition-colors duration-500 ${themeStyles.sectionTitle[theme]}`}
+          >
             Momentos Mágicos
           </h2>
-          <p className={`font-elegant text-lg italic transition-colors duration-500 ${themeStyles.subtitleMuted[theme]}`}>
+          <p
+            className={`font-elegant text-lg italic transition-colors duration-500 ${themeStyles.subtitleMuted[theme]}`}
+          >
             un recorrido por mis mejores momentos
           </p>
-          <div className={`w-32 h-[1px] mx-auto mt-4 transition-all duration-500 ${themeStyles.decorLine[theme]}`} />
+          <div
+            className={`w-32 h-[1px] mx-auto mt-4 transition-all duration-500 ${themeStyles.decorLine[theme]}`}
+          />
         </div>
 
         {/* Grid Masonry */}
@@ -90,14 +96,20 @@ export default function PhotoGallery() {
               />
 
               {/* Overlay en hover */}
-              <div className={`absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${themeStyles.galleryCard[theme]} ${themeStyles.galleryOverlay[theme]}`} />
+              <div
+                className={`absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${themeStyles.galleryCard[theme]} ${themeStyles.galleryOverlay[theme]}`}
+              />
 
               {/* Borde en hover */}
-              <div className={`absolute inset-0 border-2 transition-all duration-500 ${themeStyles.galleryCard[theme]} ${themeStyles.galleryBorderHover[theme]}`} />
+              <div
+                className={`absolute inset-0 border-2 transition-all duration-500 ${themeStyles.galleryCard[theme]} ${themeStyles.galleryBorderHover[theme]}`}
+              />
 
               {/* Caption */}
               <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-                <p className={`font-elegant text-sm drop-shadow-lg ${theme === 'magico' ? 'text-white' : 'text-purple-900'}`}>
+                <p
+                  className={`font-elegant text-sm drop-shadow-lg ${theme === "magico" ? "text-white" : theme === "porcelana" ? "text-violet-900" : "text-purple-900"}`}
+                >
                   {photo.alt}
                 </p>
               </div>
@@ -128,24 +140,34 @@ export default function PhotoGallery() {
                 src={selectedPhoto.src}
                 alt={selectedPhoto.alt}
                 className={`w-full h-full object-contain rounded-2xl ${
-                  theme === 'magico' ? 'shadow-[0_0_60px_rgba(255,215,0,0.2)]' : 'shadow-2xl'
+                  theme === "magico"
+                    ? "shadow-[0_0_60px_rgba(255,215,0,0.2)]"
+                    : theme === "jardin"
+                      ? "shadow-xl"
+                      : "shadow-2xl"
                 }`}
               />
               <button
                 onClick={() => setSelectedPhoto(null)}
                 className={`absolute -top-3 -right-3 w-10 h-10 rounded-full flex items-center justify-center text-xl cursor-pointer transition-colors border ${
-                  theme === 'magico'
-                    ? 'bg-morado text-white hover:bg-dorado hover:text-noche border-dorado/40'
-                    : theme === 'castillo'
-                      ? 'bg-purple-600 text-white hover:bg-amber-400 hover:text-purple-900 border-amber-300'
-                      : 'bg-rose-400 text-white hover:bg-rose-300 border-rose-200'
+                  theme === "magico"
+                    ? "bg-morado text-white hover:bg-dorado hover:text-noche border-dorado/40"
+                    : theme === "castillo"
+                      ? "bg-purple-600 text-white hover:bg-amber-400 hover:text-purple-900 border-amber-300"
+                      : theme === "jardin"
+                        ? "bg-purple-400 text-white hover:bg-purple-300 border-purple-200"
+                        : theme === "porcelana"
+                          ? "bg-violet-600 text-white hover:bg-violet-400 border-violet-300"
+                          : "bg-rose-400 text-white hover:bg-rose-300 border-rose-200"
                 }`}
               >
                 ✕
               </button>
-              <p className={`text-center font-elegant mt-4 text-lg transition-colors duration-500 ${
-                theme === 'magico' ? 'text-lila-light' : 'text-white'
-              }`}>
+              <p
+                className={`text-center font-elegant mt-4 text-lg transition-colors duration-500 ${
+                  theme === "magico" ? "text-lila-light" : theme === "jardin" ? "text-stone-700" : "text-white"
+                }`}
+              >
                 {selectedPhoto.alt}
               </p>
             </motion.div>

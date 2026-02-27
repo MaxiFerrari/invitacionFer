@@ -33,14 +33,22 @@ function TimeUnit({ value, label, index, theme }) {
     >
       <div className="relative">
         {/* Glow */}
-        <div className={`absolute inset-0 rounded-2xl blur-xl transition-colors duration-500 ${themeStyles.countdownGlow[theme]}`} />
-        <div className={`relative w-20 h-24 md:w-28 md:h-32 flex items-center justify-center rounded-2xl border transition-all duration-500 ${themeStyles.countdownUnit[theme]}`}>
-          <span className={`font-elegant text-4xl md:text-5xl font-bold tabular-nums transition-colors duration-500 ${themeStyles.countdownValue[theme]}`}>
+        <div
+          className={`absolute inset-0 rounded-2xl blur-xl transition-colors duration-500 ${themeStyles.countdownGlow[theme]}`}
+        />
+        <div
+          className={`relative w-20 h-24 md:w-28 md:h-32 flex items-center justify-center rounded-2xl border transition-all duration-500 ${themeStyles.countdownUnit[theme]}`}
+        >
+          <span
+            className={`font-elegant text-4xl md:text-5xl font-bold tabular-nums transition-colors duration-500 ${themeStyles.countdownValue[theme]}`}
+          >
             {String(value).padStart(2, "0")}
           </span>
         </div>
       </div>
-      <span className={`mt-3 text-xs md:text-sm font-body uppercase tracking-[0.2em] transition-colors duration-500 ${themeStyles.countdownLabel[theme]}`}>
+      <span
+        className={`mt-3 text-xs md:text-sm font-body uppercase tracking-[0.2em] transition-colors duration-500 ${themeStyles.countdownLabel[theme]}`}
+      >
         {label}
       </span>
     </motion.div>
@@ -78,10 +86,14 @@ export default function Countdown() {
         className="max-w-2xl mx-auto text-center"
       >
         {/* Título */}
-        <h2 className={`font-fairy text-4xl md:text-5xl mb-2 transition-colors duration-500 ${themeStyles.sectionTitle[theme]}`}>
+        <h2
+          className={`font-fairy text-4xl md:text-5xl mb-2 transition-colors duration-500 ${themeStyles.sectionTitle[theme]}`}
+        >
           Faltan
         </h2>
-        <p className={`font-elegant text-lg mb-10 italic transition-colors duration-500 ${themeStyles.subtitleMuted[theme]}`}>
+        <p
+          className={`font-elegant text-lg mb-10 italic transition-colors duration-500 ${themeStyles.subtitleMuted[theme]}`}
+        >
           para que se cumpla mi sueño
         </p>
 

@@ -219,13 +219,19 @@ export default function HeroSection() {
         transition={{ duration: 1.5, ease: "easeOut" }}
         className="absolute top-6 right-6 md:top-12 md:right-16"
       >
-        <RapunzelSun className={`w-24 h-24 md:w-36 md:h-36 animate-float-slow ${
-          theme === 'magico'
-            ? 'drop-shadow-[0_0_30px_rgba(255,215,0,0.4)]'
-            : theme === 'castillo'
-              ? 'drop-shadow-[0_0_20px_rgba(180,130,0,0.2)] opacity-70'
-              : 'drop-shadow-[0_0_20px_rgba(244,114,182,0.3)] opacity-80'
-        }`} />
+        <RapunzelSun
+          className={`w-24 h-24 md:w-36 md:h-36 animate-float-slow ${
+            theme === "magico"
+              ? "drop-shadow-[0_0_30px_rgba(255,215,0,0.4)]"
+              : theme === "castillo"
+                ? "drop-shadow-[0_0_20px_rgba(180,130,0,0.2)] opacity-70"
+                : theme === "jardin"
+                  ? "drop-shadow-[0_0_15px_rgba(168,85,247,0.15)] opacity-60"
+                  : theme === "porcelana"
+                    ? "drop-shadow-[0_0_10px_rgba(139,92,246,0.15)] opacity-50"
+                    : "drop-shadow-[0_0_20px_rgba(244,114,182,0.3)] opacity-80"
+          }`}
+        />
       </motion.div>
 
       {/* Torre */}
@@ -234,7 +240,7 @@ export default function HeroSection() {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1.2, delay: 0.3 }}
         className={`absolute left-2 bottom-0 md:left-12 transition-opacity duration-500 ${
-          theme === 'castillo' ? 'opacity-40' : 'opacity-60'
+          theme === "castillo" || theme === "porcelana" ? "opacity-40" : theme === "jardin" ? "opacity-30" : "opacity-60"
         }`}
       >
         <TowerSilhouette className="w-24 h-40 md:w-32 md:h-56" />

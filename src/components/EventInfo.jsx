@@ -24,13 +24,19 @@ export default function EventInfo() {
       >
         {/* Título */}
         <div className="text-center mb-14">
-          <h2 className={`font-fairy text-4xl md:text-5xl mb-2 transition-colors duration-500 ${themeStyles.sectionTitle[theme]}`}>
+          <h2
+            className={`font-fairy text-4xl md:text-5xl mb-2 transition-colors duration-500 ${themeStyles.sectionTitle[theme]}`}
+          >
             Te Espero
           </h2>
-          <p className={`font-elegant text-lg italic transition-colors duration-500 ${themeStyles.subtitleMuted[theme]}`}>
+          <p
+            className={`font-elegant text-lg italic transition-colors duration-500 ${themeStyles.subtitleMuted[theme]}`}
+          >
             será una noche de ensueño
           </p>
-          <div className={`w-32 h-[1px] mx-auto mt-4 transition-all duration-500 ${themeStyles.decorLine[theme]}`} />
+          <div
+            className={`w-32 h-[1px] mx-auto mt-4 transition-all duration-500 ${themeStyles.decorLine[theme]}`}
+          />
         </div>
 
         {/* Cards de información */}
@@ -43,23 +49,41 @@ export default function EventInfo() {
             transition={{ delay: 0.2, duration: 0.6 }}
             className={`group relative p-8 rounded-2xl border transition-all duration-500 ${themeStyles.card[theme]}`}
           >
-            <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${themeStyles.cardHoverOverlay[theme]}`} />
+            <div
+              className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${themeStyles.cardHoverOverlay[theme]}`}
+            />
             <div className="relative">
               <div className="text-4xl mb-4">⛪</div>
-              <h3 className={`font-elegant text-2xl mb-3 font-semibold transition-colors duration-500 ${themeStyles.cardTitle[theme]}`}>
+              <h3
+                className={`font-elegant text-2xl mb-3 font-semibold transition-colors duration-500 ${themeStyles.cardTitle[theme]}`}
+              >
                 Ceremonia Religiosa
               </h3>
-              <div className={`space-y-2 font-body text-sm transition-colors duration-500 ${themeStyles.bodyText[theme]}`}>
+              <div
+                className={`space-y-2 font-body text-sm transition-colors duration-500 ${themeStyles.bodyText[theme]}`}
+              >
                 <p className="flex items-center gap-2">
-                  <span className={`transition-colors duration-500 ${themeStyles.cardIcon[theme]}`}>📅</span>
+                  <span
+                    className={`transition-colors duration-500 ${themeStyles.cardIcon[theme]}`}
+                  >
+                    📅
+                  </span>
                   23 de Marzo de 2026
                 </p>
                 <p className="flex items-center gap-2">
-                  <span className={`transition-colors duration-500 ${themeStyles.cardIcon[theme]}`}>🕕</span>
+                  <span
+                    className={`transition-colors duration-500 ${themeStyles.cardIcon[theme]}`}
+                  >
+                    🕕
+                  </span>
                   6:00 PM
                 </p>
                 <p className="flex items-center gap-2">
-                  <span className={`transition-colors duration-500 ${themeStyles.cardIcon[theme]}`}>📍</span>
+                  <span
+                    className={`transition-colors duration-500 ${themeStyles.cardIcon[theme]}`}
+                  >
+                    📍
+                  </span>
                   Parroquia de la Asunción
                 </p>
               </div>
@@ -74,23 +98,41 @@ export default function EventInfo() {
             transition={{ delay: 0.4, duration: 0.6 }}
             className={`group relative p-8 rounded-2xl border transition-all duration-500 ${themeStyles.card[theme]}`}
           >
-            <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${themeStyles.cardHoverOverlay[theme]}`} />
+            <div
+              className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${themeStyles.cardHoverOverlay[theme]}`}
+            />
             <div className="relative">
               <div className="text-4xl mb-4">🏰</div>
-              <h3 className={`font-elegant text-2xl mb-3 font-semibold transition-colors duration-500 ${themeStyles.cardTitle[theme]}`}>
+              <h3
+                className={`font-elegant text-2xl mb-3 font-semibold transition-colors duration-500 ${themeStyles.cardTitle[theme]}`}
+              >
                 Recepción
               </h3>
-              <div className={`space-y-2 font-body text-sm transition-colors duration-500 ${themeStyles.bodyText[theme]}`}>
+              <div
+                className={`space-y-2 font-body text-sm transition-colors duration-500 ${themeStyles.bodyText[theme]}`}
+              >
                 <p className="flex items-center gap-2">
-                  <span className={`transition-colors duration-500 ${themeStyles.cardIcon[theme]}`}>📅</span>
+                  <span
+                    className={`transition-colors duration-500 ${themeStyles.cardIcon[theme]}`}
+                  >
+                    📅
+                  </span>
                   23 de Marzo de 2026
                 </p>
                 <p className="flex items-center gap-2">
-                  <span className={`transition-colors duration-500 ${themeStyles.cardIcon[theme]}`}>🕗</span>
+                  <span
+                    className={`transition-colors duration-500 ${themeStyles.cardIcon[theme]}`}
+                  >
+                    🕗
+                  </span>
                   8:00 PM
                 </p>
                 <p className="flex items-center gap-2">
-                  <span className={`transition-colors duration-500 ${themeStyles.cardIcon[theme]}`}>📍</span>
+                  <span
+                    className={`transition-colors duration-500 ${themeStyles.cardIcon[theme]}`}
+                  >
+                    📍
+                  </span>
                   Salón Jardín Encantado
                 </p>
               </div>
@@ -106,11 +148,19 @@ export default function EventInfo() {
           transition={{ delay: 0.6, duration: 0.6 }}
           className="text-center mb-12"
         >
-          <p className={`font-elegant text-lg transition-colors duration-500 ${themeStyles.dressCode[theme]}`}>
+          <p
+            className={`font-elegant text-lg transition-colors duration-500 ${themeStyles.dressCode[theme]}`}
+          >
             👗 Código de vestimenta:{" "}
-            <span className={`transition-colors duration-500 ${themeStyles.dressCodeHighlight[theme]}`}>Formal / Elegante</span>
+            <span
+              className={`transition-colors duration-500 ${themeStyles.dressCodeHighlight[theme]}`}
+            >
+              Formal / Elegante
+            </span>
           </p>
-          <p className={`font-body text-xs mt-2 italic transition-colors duration-500 ${themeStyles.dressCodeNote[theme]}`}>
+          <p
+            className={`font-body text-xs mt-2 italic transition-colors duration-500 ${themeStyles.dressCodeNote[theme]}`}
+          >
             Evitar color lila, reservado para la quinceañera ✨
           </p>
         </motion.div>
@@ -128,18 +178,26 @@ export default function EventInfo() {
             target="_blank"
             rel="noopener noreferrer"
             className={`group relative inline-flex items-center gap-3 px-10 py-4 rounded-full font-body font-semibold text-lg overflow-hidden transition-all duration-500 hover:scale-105 active:scale-95 ${
-              theme === 'magico'
-                ? 'text-noche hover:shadow-[0_0_40px_rgba(255,215,0,0.4)]'
-                : theme === 'castillo'
-                  ? 'text-white hover:shadow-[0_0_30px_rgba(147,51,234,0.3)]'
-                  : 'text-white hover:shadow-[0_0_30px_rgba(244,114,182,0.3)]'
+              theme === "magico"
+                ? "text-noche hover:shadow-[0_0_40px_rgba(255,215,0,0.4)]"
+                : theme === "castillo"
+                  ? "text-white hover:shadow-[0_0_30px_rgba(147,51,234,0.3)]"
+                  : theme === "jardin"
+                    ? "text-white hover:shadow-[0_0_25px_rgba(168,85,247,0.25)]"
+                    : theme === "porcelana"
+                      ? "text-white hover:shadow-[0_0_25px_rgba(139,92,246,0.3)]"
+                      : "text-white hover:shadow-[0_0_30px_rgba(244,114,182,0.3)]"
             }`}
           >
             {/* Fondo gradiente */}
-            <div className={`absolute inset-0 bg-[length:200%_100%] group-hover:animate-gradient transition-all duration-500 ${themeStyles.whatsappBg[theme]}`} />
+            <div
+              className={`absolute inset-0 bg-[length:200%_100%] group-hover:animate-gradient transition-all duration-500 ${themeStyles.whatsappBg[theme]}`}
+            />
 
             {/* Borde brillante */}
-            <div className={`absolute inset-[1px] rounded-full opacity-90 ${themeStyles.whatsappInner[theme]}`} />
+            <div
+              className={`absolute inset-[1px] rounded-full opacity-90 ${themeStyles.whatsappInner[theme]}`}
+            />
 
             {/* Contenido */}
             <span className="relative flex items-center gap-3">
@@ -150,7 +208,9 @@ export default function EventInfo() {
             </span>
           </a>
 
-          <p className={`font-body text-xs mt-4 transition-colors duration-500 ${themeStyles.whatsappNote[theme]}`}>
+          <p
+            className={`font-body text-xs mt-4 transition-colors duration-500 ${themeStyles.whatsappNote[theme]}`}
+          >
             Se abrirá WhatsApp con un mensaje predeterminado
           </p>
         </motion.div>
