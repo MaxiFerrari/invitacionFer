@@ -1,41 +1,190 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useCallback } from "react";
 
-/**
- * 3 diseños radicalmente diferentes:
- *
- * encanto  → "Encanto Real": Limpio, moderno, sol dorado y lila, layout tradicional.
- *             Tipografía: Great Vibes + Cormorant Garamond + Montserrat
- *
- * bosque   → "El Bosque Susurrante": Fotorrealista, bosque nocturno con neblina
- *             y luciérnagas, marcos de ramas, layout orgánico/disperso.
- *             Tipografía: IM Fell English SC + Montserrat
- *
- * luces    → "La Noche de las Luces": Cielo estrellado con faroles flotantes,
- *             glassmorphism, destellos dorados, layout centralizado etéreo.
- *             Tipografía: Pinyon Script + Cormorant Garamond + Montserrat
- */
+/* ──────────────────────────────────────────────────────
+   Temas disponibles – sólo Blancos · Marfil · Lila · Oro Rosa
+   ────────────────────────────────────────────────────── */
 export const THEMES = {
-  encanto: "encanto",
-  bosque: "bosque",
-  luces: "luces",
+  flores: "flores",
+  editorial: "editorial",
+  bruma: "bruma",
 };
 
-const THEME_ORDER = [THEMES.encanto, THEMES.bosque, THEMES.luces];
+const THEME_LIST = Object.values(THEMES);
 
+/* ── Mapas de fuentes por tema ── */
+const FONT_MAP = {
+  flores: {
+    title: "Great Vibes, cursive",
+    heading: "Cormorant Garamond, serif",
+    body: "Montserrat, sans-serif",
+  },
+  editorial: {
+    title: "Cormorant Garamond, serif",
+    heading: "Cormorant Garamond, serif",
+    body: "Montserrat, sans-serif",
+  },
+  bruma: {
+    title: "Pinyon Script, cursive",
+    heading: "Cormorant Garamond, serif",
+    body: "Montserrat, sans-serif",
+  },
+};
+
+/* ── Estilos mapeados por tema (S = Styles) ── */
+export const S = {
+  /* ━━━━ BOSQUE DE FLORES ━━━━
+     Centralized layout, paper texture, vine borders,
+     circular photo frames, lots of whitespace */
+  flores: {
+    // Fondos
+    pageBg: "bg-white bg-paper",
+    sectionBg: "bg-white/70",
+    cardBg: "bg-white border border-lila-light/40 shadow-md",
+    heroBg: "bg-gradient-to-b from-white via-lila-pastel/20 to-white",
+    footerBg: "bg-gradient-to-t from-lila-pastel/30 to-transparent",
+
+    // Texto
+    titleColor: "text-lila-dark",
+    headingColor: "text-rosa-oro",
+    textColor: "text-lila-dark/80",
+    subtitleColor: "text-lila/90",
+    accentColor: "text-rosa-oro",
+
+    // Decoradores
+    borderColor: "border-lila-light",
+    dividerColor: "bg-lila-light/50",
+    glowColor: "shadow-lila-light/30",
+
+    // Countdown
+    countdownBg: "bg-white/80 border border-lila-light/30",
+    countdownNum: "text-rosa-oro",
+    countdownLabel: "text-lila/70",
+
+    // Galería
+    photoBorder: "border-4 border-lila-light rounded-full shadow-lg shadow-lila-light/20",
+    photoShape: "rounded-full",
+    photoWrapper: "flex flex-wrap justify-center gap-8",
+
+    // Botones
+    buttonBg: "bg-rosa-oro hover:bg-rosa-oro-light text-white",
+    buttonOutline: "border-2 border-rosa-oro text-rosa-oro hover:bg-rosa-oro/10",
+
+    // Fuentes
+    titleFont: "font-fairy",
+    headingFont: "font-elegant",
+    bodyFont: "font-body",
+
+    // Efectos
+    titleSize: "text-6xl md:text-8xl",
+    cardRounded: "rounded-2xl",
+    layoutClass: "text-center max-w-3xl mx-auto",
+  },
+
+  /* ━━━━ CUENTO EDITORIAL ━━━━
+     Asymmetric luxury magazine style, large serif,
+     deep shadows, gold sparkles on scroll */
+  editorial: {
+    pageBg: "bg-gradient-to-br from-marfil via-blanco-roto to-lila-pastel/15",
+    sectionBg: "bg-marfil/50",
+    cardBg: "bg-marfil border border-marfil-dark/20 shadow-2xl",
+    heroBg: "bg-gradient-to-br from-marfil via-lila-pastel/10 to-marfil",
+    footerBg: "bg-gradient-to-t from-marfil-dark/20 to-transparent",
+
+    titleColor: "text-lila-deep",
+    headingColor: "text-lila-dark",
+    textColor: "text-lila-deep/70",
+    subtitleColor: "text-rosa-oro",
+    accentColor: "text-rosa-oro",
+
+    borderColor: "border-marfil-dark/30",
+    dividerColor: "bg-rosa-oro/30",
+    glowColor: "shadow-rosa-oro-soft/20",
+
+    countdownBg: "bg-marfil/90 border border-rosa-oro-soft/30 shadow-xl",
+    countdownNum: "text-lila-deep",
+    countdownLabel: "text-rosa-oro/80",
+
+    photoBorder: "border-2 border-marfil-dark/20 rounded-lg shadow-2xl shadow-black/15",
+    photoShape: "rounded-lg",
+    photoWrapper: "grid grid-cols-1 md:grid-cols-2 gap-6",
+
+    buttonBg: "bg-lila-dark hover:bg-morado-deep text-white shadow-xl",
+    buttonOutline: "border-2 border-lila-dark text-lila-dark hover:bg-lila-dark/10",
+
+    titleFont: "font-editorial",
+    headingFont: "font-editorial",
+    bodyFont: "font-body",
+
+    titleSize: "text-7xl md:text-9xl font-light tracking-tight",
+    cardRounded: "rounded-xl",
+    layoutClass: "max-w-5xl mx-auto",
+  },
+
+  /* ━━━━ BRUMA REAL ━━━━
+     Full-height sections, lilac clouds, extreme glassmorphism,
+     polaroid-style floating photos */
+  bruma: {
+    pageBg: "bg-gradient-to-b from-lila-pastel/40 via-white to-lila-light/30",
+    sectionBg: "bg-transparent",
+    cardBg: "bg-white/20 backdrop-blur-xl border border-white/30 shadow-xl shadow-lila/10",
+    heroBg: "bg-gradient-to-b from-lila-light/30 via-white/50 to-lila-pastel/20",
+    footerBg: "bg-gradient-to-t from-lila-light/30 to-transparent",
+
+    titleColor: "text-lila-dark",
+    headingColor: "text-lila-dark/90",
+    textColor: "text-lila-deep/70",
+    subtitleColor: "text-rosa-oro",
+    accentColor: "text-rosa-oro-light",
+
+    borderColor: "border-white/40",
+    dividerColor: "bg-white/40",
+    glowColor: "shadow-lila/20",
+
+    countdownBg: "bg-white/15 backdrop-blur-xl border border-white/30",
+    countdownNum: "text-white",
+    countdownLabel: "text-lila-light",
+
+    photoBorder: "border-8 border-white/80 rounded-sm shadow-xl shadow-lila/15",
+    photoShape: "rounded-sm",
+    photoWrapper: "flex flex-wrap justify-center gap-6",
+
+    buttonBg: "bg-rosa-oro/80 backdrop-blur-sm hover:bg-rosa-oro text-white",
+    buttonOutline: "border-2 border-white/50 text-white hover:bg-white/10 backdrop-blur-sm",
+
+    titleFont: "font-calligraphy",
+    headingFont: "font-elegant",
+    bodyFont: "font-body",
+
+    titleSize: "text-6xl md:text-8xl",
+    cardRounded: "rounded-3xl",
+    layoutClass: "text-center max-w-4xl mx-auto",
+  },
+};
+
+/* ── Context ── */
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(THEMES.encanto);
+  const [theme, setTheme] = useState(THEMES.flores);
 
-  const cycleTheme = () => {
+  const cycleTheme = useCallback(() => {
     setTheme((prev) => {
-      const idx = THEME_ORDER.indexOf(prev);
-      return THEME_ORDER[(idx + 1) % THEME_ORDER.length];
+      const idx = THEME_LIST.indexOf(prev);
+      return THEME_LIST[(idx + 1) % THEME_LIST.length];
     });
-  };
+  }, []);
+
+  const selectTheme = useCallback((t) => {
+    if (THEME_LIST.includes(t)) setTheme(t);
+  }, []);
+
+  const styles = S[theme];
+  const fonts = FONT_MAP[theme];
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, cycleTheme }}>
+    <ThemeContext.Provider
+      value={{ theme, setTheme: selectTheme, cycleTheme, styles, fonts }}
+    >
       {children}
     </ThemeContext.Provider>
   );
@@ -43,309 +192,8 @@ export function ThemeProvider({ children }) {
 
 export function useTheme() {
   const ctx = useContext(ThemeContext);
-  if (!ctx) throw new Error("useTheme must be used inside ThemeProvider");
+  if (!ctx) throw new Error("useTheme must be used within ThemeProvider");
   return ctx;
 }
 
-/* ─────────────────────────────────────────────
-   Configuración de diseño por tema
-   ───────────────────────────────────────────── */
-
-/** Fuentes por tema */
-export const fonts = {
-  title: {
-    encanto: "font-fairy",
-    bosque: "font-forest",
-    luces: "font-calligraphy",
-  },
-  heading: {
-    encanto: "font-elegant",
-    bosque: "font-forest",
-    luces: "font-elegant",
-  },
-  body: {
-    encanto: "font-body",
-    bosque: "font-body",
-    luces: "font-body",
-  },
-};
-
-/** Mapa completo de estilos por tema */
-export const S = {
-  /* ── Raíz ── */
-  root: {
-    encanto: "bg-gradient-to-b from-slate-50 via-purple-50/50 to-white text-purple-900",
-    bosque: "bg-bosque text-amber-50",
-    luces: "bg-cielo text-white",
-  },
-
-  /* ── Títulos principales ── */
-  titleMain: {
-    encanto: "text-purple-800 drop-shadow-none",
-    bosque: "text-amber-200 drop-shadow-[0_0_30px_rgba(255,215,0,0.2)]",
-    luces: "text-dorado animate-golden-pulse",
-  },
-
-  sectionTitle: {
-    encanto: "text-purple-800",
-    bosque: "text-amber-300/90",
-    luces: "text-dorado",
-  },
-
-  /* ── Subtítulos ── */
-  subtitle: {
-    encanto: "text-purple-600",
-    bosque: "text-niebla/80",
-    luces: "text-lila-light/90",
-  },
-
-  subtitleMuted: {
-    encanto: "text-purple-400",
-    bosque: "text-niebla/50",
-    luces: "text-lila-light/60",
-  },
-
-  /* ── Texto de cuerpo ── */
-  bodyText: {
-    encanto: "text-purple-700",
-    bosque: "text-amber-100/80",
-    luces: "text-lila-light/80",
-  },
-
-  bodyMuted: {
-    encanto: "text-purple-400",
-    bosque: "text-niebla/40",
-    luces: "text-lila-light/50",
-  },
-
-  /* ── Líneas decorativas ── */
-  decorLine: {
-    encanto: "bg-gradient-to-r from-transparent via-amber-300 to-transparent",
-    bosque: "bg-gradient-to-r from-transparent via-amber-700/40 to-transparent",
-    luces: "bg-gradient-to-r from-transparent via-dorado/60 to-transparent",
-  },
-
-  decorLineLila: {
-    encanto: "bg-gradient-to-r from-transparent via-purple-300 to-transparent",
-    bosque: "bg-gradient-to-r from-transparent via-musgo/40 to-transparent",
-    luces: "bg-gradient-to-r from-transparent via-lila/40 to-transparent",
-  },
-
-  /* ── Cards ── */
-  card: {
-    encanto: "border-amber-200 bg-white shadow-xl hover:border-amber-400 hover:shadow-2xl rounded-2xl",
-    bosque: "border-amber-900/40 bg-bosque/70 backdrop-blur-sm shadow-[0_0_25px_rgba(0,0,0,0.4)] hover:border-amber-700/60 rounded-xl",
-    luces: "border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_0_30px_rgba(255,215,0,0.08)] hover:border-dorado/30 hover:shadow-[0_0_40px_rgba(255,215,0,0.15)] rounded-2xl",
-  },
-
-  cardHoverOverlay: {
-    encanto: "bg-gradient-to-br from-amber-50 to-transparent",
-    bosque: "bg-gradient-to-br from-amber-900/10 to-transparent",
-    luces: "bg-gradient-to-br from-dorado/5 to-transparent",
-  },
-
-  cardTitle: {
-    encanto: "text-purple-800",
-    bosque: "text-amber-300",
-    luces: "text-dorado",
-  },
-
-  cardIcon: {
-    encanto: "text-amber-500",
-    bosque: "text-amber-600/70",
-    luces: "text-dorado/70",
-  },
-
-  /* ── Countdown ── */
-  countdownUnit: {
-    encanto: "border-amber-200 bg-white shadow-xl rounded-2xl",
-    bosque: "border-amber-900/30 bg-bosque/60 backdrop-blur-sm shadow-lg rounded-xl",
-    luces: "border-dorado/20 bg-white/5 backdrop-blur-xl shadow-[0_0_20px_rgba(255,215,0,0.08)] rounded-2xl",
-  },
-
-  countdownGlow: {
-    encanto: "bg-amber-100/50",
-    bosque: "bg-amber-700/10",
-    luces: "bg-dorado/10",
-  },
-
-  countdownValue: {
-    encanto: "text-purple-800",
-    bosque: "text-amber-200",
-    luces: "text-dorado",
-  },
-
-  countdownLabel: {
-    encanto: "text-purple-400",
-    bosque: "text-niebla/50",
-    luces: "text-lila-light/60",
-  },
-
-  /* ── Gallery ── */
-  galleryOverlay: {
-    encanto: "from-amber-400/30",
-    bosque: "from-amber-900/50",
-    luces: "from-dorado/40",
-  },
-
-  galleryBorderHover: {
-    encanto: "border-transparent group-hover:border-amber-300 shadow-none group-hover:shadow-2xl",
-    bosque: "border-transparent group-hover:border-amber-700/50 shadow-none group-hover:shadow-[inset_0_0_20px_rgba(139,69,19,0.2)]",
-    luces: "border-dorado/0 group-hover:border-dorado/50 shadow-none group-hover:shadow-[inset_0_0_30px_rgba(255,215,0,0.12)]",
-  },
-
-  galleryCard: {
-    encanto: "rounded-2xl shadow-lg",
-    bosque: "rounded-lg shadow-md",
-    luces: "rounded-xl",
-  },
-
-  lightboxBg: {
-    encanto: "bg-black/60 backdrop-blur-sm",
-    bosque: "bg-bosque/90 backdrop-blur-lg",
-    luces: "bg-cielo/90 backdrop-blur-md",
-  },
-
-  lightboxClose: {
-    encanto: "bg-purple-600 text-white hover:bg-amber-400 hover:text-purple-900 border-amber-300",
-    bosque: "bg-amber-800 text-amber-100 hover:bg-amber-600 border-amber-600/40",
-    luces: "bg-morado text-white hover:bg-dorado hover:text-noche border-dorado/40",
-  },
-
-  lightboxCaption: {
-    encanto: "text-white",
-    bosque: "text-amber-200",
-    luces: "text-lila-light",
-  },
-
-  lightboxShadow: {
-    encanto: "shadow-2xl",
-    bosque: "shadow-[0_0_40px_rgba(139,69,19,0.3)]",
-    luces: "shadow-[0_0_60px_rgba(255,215,0,0.2)]",
-  },
-
-  galleryCaptionText: {
-    encanto: "text-purple-900",
-    bosque: "text-amber-100",
-    luces: "text-white",
-  },
-
-  /* ── WhatsApp ── */
-  whatsappBg: {
-    encanto: "bg-gradient-to-r from-purple-600 via-amber-400 to-purple-600",
-    bosque: "bg-gradient-to-r from-amber-800 via-amber-600 to-amber-800",
-    luces: "bg-gradient-to-r from-lila via-dorado to-lila",
-  },
-
-  whatsappInner: {
-    encanto: "bg-gradient-to-r from-purple-500 via-amber-300 to-amber-400",
-    bosque: "bg-gradient-to-r from-amber-700 via-amber-500 to-amber-700",
-    luces: "bg-gradient-to-r from-lila via-dorado to-dorado-soft",
-  },
-
-  whatsappText: {
-    encanto: "text-white",
-    bosque: "text-amber-50",
-    luces: "text-noche",
-  },
-
-  whatsappGlow: {
-    encanto: "hover:shadow-[0_0_30px_rgba(147,51,234,0.3)]",
-    bosque: "hover:shadow-[0_0_30px_rgba(139,69,19,0.4)]",
-    luces: "hover:shadow-[0_0_40px_rgba(255,215,0,0.4)]",
-  },
-
-  whatsappNote: {
-    encanto: "text-purple-300",
-    bosque: "text-niebla/30",
-    luces: "text-lila-light/40",
-  },
-
-  /* ── Dress code ── */
-  dressCode: {
-    encanto: "text-purple-600",
-    bosque: "text-niebla/70",
-    luces: "text-lila-light/70",
-  },
-
-  dressCodeHighlight: {
-    encanto: "text-amber-600 font-semibold",
-    bosque: "text-amber-300 font-semibold",
-    luces: "text-dorado font-semibold",
-  },
-
-  dressCodeNote: {
-    encanto: "text-purple-400",
-    bosque: "text-niebla/40",
-    luces: "text-lila-light/50",
-  },
-
-  /* ── Footer ── */
-  footerBorder: {
-    encanto: "border-purple-100",
-    bosque: "border-amber-900/20",
-    luces: "border-lila/10",
-  },
-
-  footerQuote: {
-    encanto: "text-purple-400",
-    bosque: "text-niebla/50",
-    luces: "text-lila-light/50",
-  },
-
-  footerName: {
-    encanto: "text-purple-700",
-    bosque: "text-amber-300/60",
-    luces: "text-dorado/60",
-  },
-
-  footerYear: {
-    encanto: "text-purple-300",
-    bosque: "text-niebla/30",
-    luces: "text-lila-light/30",
-  },
-
-  footerDecorStar: {
-    encanto: "text-amber-300",
-    bosque: "text-amber-700/40",
-    luces: "text-dorado/40",
-  },
-
-  footerDecorLine: {
-    encanto: "bg-amber-200",
-    bosque: "bg-amber-800/30",
-    luces: "bg-dorado/30",
-  },
-
-  /* ── Separadores ── */
-  separatorLine: {
-    encanto: "bg-gradient-to-r from-transparent to-amber-200",
-    bosque: "bg-gradient-to-r from-transparent to-amber-800/30",
-    luces: "bg-gradient-to-r from-transparent to-dorado/30",
-  },
-
-  separatorLineReverse: {
-    encanto: "bg-gradient-to-l from-transparent to-amber-200",
-    bosque: "bg-gradient-to-l from-transparent to-amber-800/30",
-    luces: "bg-gradient-to-l from-transparent to-dorado/30",
-  },
-
-  separatorStar: {
-    encanto: "text-amber-300",
-    bosque: "text-amber-700/40",
-    luces: "text-dorado/40",
-  },
-
-  separatorIcon: {
-    encanto: "✦",
-    bosque: "🌿",
-    luces: "✦",
-  },
-
-  /* ── Scroll arrow ── */
-  scrollArrow: {
-    encanto: "text-purple-300",
-    bosque: "text-amber-600/50",
-    luces: "text-dorado/60",
-  },
-};
+export default ThemeContext;

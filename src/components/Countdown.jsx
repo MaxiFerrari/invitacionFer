@@ -1,98 +1,86 @@
-import { useState, useEffect } from "react";
+import { useTheme } from "../context/ThemeContext";
 import { motion } from "framer-motion";
-import { useTheme, S, fonts } from "../context/ThemeContext";
+import { useState, useEffect } from "react";
 
-const EVENT_DATE = new Date("2026-03-23T18:00:00");
+/* ──────────────────────────────────────────────
+   Countdown – Cuenta regresiva al 23 de Marzo 2026
+   ────────────────────────────────────────────── */
 
-function calculateTimeLeft() {
-  const diff = EVENT_DATE - new Date();
-  if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0, finished: true };
+const TARGET = new Date("2026-03-23T18:00:00-06:00").getTime();
+
+function calcTimeLeft() {
+  const now = Date.now();
+  const diff = TARGET - now;
+  if (diff <= 0) return { dias: 0, horas: 0, minutos: 0, segundos: 0 };
   return {
-    days: Math.floor(diff / (1000 * 60 * 60 * 24)),
-    hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
-    minutes: Math.floor((diff / (1000 * 60)) % 60),
-    seconds: Math.floor((diff / 1000) % 60),
-    finished: false,
+    dias: Math.floor(diff / (1000 * 60 * 60 * 24)),
+    horas: Math.floor((diff / (1000 * 60 * 60)) % 24),
+    minutos: Math.floor((diff / (1000 * 60)) % 60),
+    segundos: Math.floor((diff / 1000) % 60),
   };
 }
 
-function TimeUnit({ value, label, index, theme }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.15, duration: 0.6 }}
-      className="flex flex-col items-center"
-    >
-      <div className="relative">
-        <div className={`absolute inset-0 rounded-2xl blur-xl transition-colors duration-500 ${S.countdownGlow[theme]}`} />
-        <div className={`relative w-20 h-24 md:w-28 md:h-32 flex items-center justify-center border transition-all duration-500 ${S.countdownUnit[theme]}`}>
-          <span className={`${fonts.heading[theme]} text-4xl md:text-5xl font-bold tabular-nums transition-colors duration-500 ${S.countdownValue[theme]}`}>
-            {String(value).padStart(2, "0")}
-          </span>
-        </div>
-      </div>
-      <span className={`mt-3 text-xs md:text-sm font-body uppercase tracking-[0.2em] transition-colors duration-500 ${S.countdownLabel[theme]}`}>
-        {label}
-      </span>
-    </motion.div>
-  );
-}
+const labels = { dias: "Días", horas: "Horas", minutos: "Min", segundos: "Seg" };
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
+};
 
 export default function Countdown() {
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft);
-  const { theme } = useTheme();
+  const { styles: s } = useTheme();
+  const [time, setTime] = useState(calcTimeLeft);
 
   useEffect(() => {
-    const timer = setInterval(() => setTimeLeft(calculateTimeLeft()), 1000);
-    return () => clearInterval(timer);
+    const id = setInterval(() => setTime(calcTimeLeft()), 1000);
+    return () => clearInterval(id);
   }, []);
 
-  const units = [
-    { value: timeLeft.days, label: "Días" },
-    { value: timeLeft.hours, label: "Horas" },
-    { value: timeLeft.minutes, label: "Minutos" },
-    { value: timeLeft.seconds, label: "Segundos" },
-  ];
-
   return (
-    <section className="relative z-10 py-20 px-4">
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="max-w-2xl mx-auto text-center"
-      >
-        <h2 className={`${fonts.title[theme]} text-4xl md:text-5xl mb-2 transition-colors duration-500 ${S.sectionTitle[theme]}`}>
+    <motion.section
+      className={`${s.sectionBg} py-20 px-6 transition-all duration-1000`}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}
+      variants={fadeUp}
+    >
+      <div className={s.layoutClass}>
+        <h2
+          className={`${s.headingFont} text-3xl md:text-4xl ${s.headingColor} mb-2 text-center`}
+        >
           Faltan
         </h2>
-        <p className={`${fonts.heading[theme]} text-lg mb-10 italic transition-colors duration-500 ${S.subtitleMuted[theme]}`}>
-          para que se cumpla mi sueño
-        </p>
+        <div className="flex items-center justify-center gap-3 mb-10">
+          <span className="block w-10 h-px bg-rosa-oro/30" />
+          <span className="text-rosa-oro text-sm">✦</span>
+          <span className="block w-10 h-px bg-rosa-oro/30" />
+        </div>
 
-        {timeLeft.finished ? (
-          <motion.p initial={{ scale: 0 }} animate={{ scale: 1 }}
-            className={`${fonts.title[theme]} text-5xl transition-colors duration-500 ${S.sectionTitle[theme]}`}>
-            ¡Es hoy! ✨
-          </motion.p>
-        ) : (
-          <div className="flex justify-center gap-3 md:gap-6">
-            {units.map((u, i) => (
-              <TimeUnit key={u.label} value={u.value} label={u.label} index={i} theme={theme} />
-            ))}
-          </div>
-        )}
-
-        <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.8, duration: 0.8 }}
-          className={`w-48 h-[1px] mx-auto mt-12 transition-all duration-500 ${S.decorLineLila[theme]}`}
-        />
-      </motion.div>
-    </section>
+        <div className="flex justify-center gap-4 md:gap-6 flex-wrap">
+          {Object.entries(time).map(([key, val]) => (
+            <motion.div
+              key={key}
+              className={`${s.countdownBg} ${s.cardRounded} px-5 py-6 md:px-8 md:py-8 min-w-[70px] md:min-w-[90px] text-center transition-all duration-1000`}
+              whileHover={{ scale: 1.05 }}
+            >
+              <motion.span
+                className={`block ${s.headingFont} text-3xl md:text-5xl font-light ${s.countdownNum}`}
+                key={val}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {String(val).padStart(2, "0")}
+              </motion.span>
+              <span
+                className={`block ${s.bodyFont} text-[10px] md:text-xs uppercase tracking-widest mt-2 ${s.countdownLabel}`}
+              >
+                {labels[key]}
+              </span>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </motion.section>
   );
 }

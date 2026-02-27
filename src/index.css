@@ -1,41 +1,48 @@
 @import "tailwindcss";
 
-/* ── Google Fonts (loaded in index.html) ── */
-/* Great Vibes — títulos mágicos (encanto) */
-/* IM Fell English SC — serif envejecida (bosque) */
-/* Pinyon Script — caligrafía fina (luces) */
-/* Cormorant Garamond — texto elegante */
-/* Montserrat — cuerpo limpio */
+/* ── Google Fonts (loaded in index.html) ──
+   Great Vibes        — títulos mágicos (flores)
+   Cormorant Garamond — serifas elegantes (editorial + headings)
+   Pinyon Script      — caligrafía etérea (bruma)
+   Montserrat         — cuerpo limpio
+   IM Fell English SC — (cargada, se conserva)
+   ────────────────────────────────────────── */
 
 @theme {
+  /* Fuentes */
   --font-fairy: "Great Vibes", cursive;
-  --font-forest: "IM Fell English SC", serif;
+  --font-editorial: "Cormorant Garamond", serif;
   --font-calligraphy: "Pinyon Script", cursive;
   --font-elegant: "Cormorant Garamond", serif;
   --font-body: "Montserrat", sans-serif;
 
-  /* Paleta Rapunzel / Encanto */
+  /* ── Paleta exclusiva: Blanco · Marfil · Lila suave · Oro Rosa ── */
+  --color-blanco: #ffffff;
+  --color-blanco-roto: #fafaf8;
+  --color-marfil: #fff8e7;
+  --color-marfil-mid: #f5f0e8;
+  --color-marfil-dark: #ede4d4;
+
   --color-lila: #c9a0dc;
   --color-lila-light: #e8d5f5;
+  --color-lila-suave: #d4b5e8;
+  --color-lila-pastel: #eddaf7;
   --color-lila-dark: #7b2d8e;
-  --color-morado: #6a0dad;
-  --color-dorado: #ffd700;
-  --color-dorado-soft: #f5cc00;
-  --color-dorado-dark: #b8860b;
+  --color-lila-deep: #5c1d6e;
+
+  --color-rosa-oro: #b76e79;
+  --color-rosa-oro-light: #d4a0a0;
+  --color-rosa-oro-soft: #e8c4c4;
+  --color-rosa-oro-glow: #e0b0b0;
+
+  --color-morado: #9b59b6;
+  --color-morado-deep: #6a0dad;
+
+  /* Mantenemos noche para scrollbar / música player */
   --color-noche: #1a0a2e;
   --color-noche-light: #2d1b4e;
-
-  /* Paleta Bosque */
-  --color-bosque: #0d1f0d;
-  --color-bosque-mid: #1a3a1a;
-  --color-musgo: #2d4a2d;
-  --color-niebla: #b8c5b8;
-  --color-madera: #5c3a1e;
-  --color-madera-light: #8b6f47;
-
-  /* Paleta Luces */
-  --color-cielo: #0a0a2e;
-  --color-cielo-mid: #141450;
+  --color-dorado: #d4a574;
+  --color-dorado-soft: #c9956a;
 }
 
 /* ── Animaciones base ── */
@@ -59,45 +66,51 @@
   0%, 100% { opacity: 0.2; transform: scale(0.8); }
   50% { opacity: 1; transform: scale(1.2); }
 }
-@keyframes lantern-rise {
-  0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 0.8; }
-  100% { transform: translateY(-20vh) scale(1); opacity: 0; }
-}
 
-/* ── Animaciones Bosque ── */
-@keyframes firefly {
-  0%, 100% { opacity: 0; transform: translate(0, 0) scale(0.5); }
-  20% { opacity: 1; transform: translate(15px, -20px) scale(1); }
-  50% { opacity: 0.6; transform: translate(-10px, -50px) scale(0.8); }
-  80% { opacity: 1; transform: translate(20px, -30px) scale(1.1); }
-}
-@keyframes fog-drift {
-  0% { transform: translateX(-10%) scaleX(1.2); opacity: 0.15; }
-  50% { transform: translateX(5%) scaleX(1); opacity: 0.25; }
-  100% { transform: translateX(-10%) scaleX(1.2); opacity: 0.15; }
-}
-@keyframes fog-drift-reverse {
-  0% { transform: translateX(10%) scaleX(1.1); opacity: 0.1; }
-  50% { transform: translateX(-8%) scaleX(1.3); opacity: 0.2; }
-  100% { transform: translateX(10%) scaleX(1.1); opacity: 0.1; }
-}
+/* ── Animaciones Enredaderas (flores) ── */
 @keyframes vine-sway {
-  0%, 100% { transform: rotate(-1deg); }
-  50% { transform: rotate(1deg); }
+  0%, 100% { transform: rotate(-0.5deg); }
+  50% { transform: rotate(0.5deg); }
+}
+@keyframes sparkle-twinkle {
+  0%, 100% { opacity: 0; transform: scale(0.3); }
+  50% { opacity: 1; transform: scale(1); }
 }
 
-/* ── Animaciones Luces ── */
+/* ── Animaciones Editorial (destellos al scroll) ── */
 @keyframes sparkle-fall {
   0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
   10% { opacity: 1; }
-  90% { opacity: 0.8; }
+  90% { opacity: 0.6; }
   100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
 }
-@keyframes golden-pulse {
-  0%, 100% { text-shadow: 0 0 20px rgba(255,215,0,0.4), 0 0 40px rgba(255,215,0,0.2); }
-  50% { text-shadow: 0 0 40px rgba(255,215,0,0.7), 0 0 80px rgba(255,215,0,0.4), 0 0 120px rgba(255,215,0,0.15); }
+@keyframes gold-shimmer {
+  0%, 100% {
+    text-shadow: 0 0 20px rgba(183,110,121,0.3), 0 0 40px rgba(183,110,121,0.15);
+  }
+  50% {
+    text-shadow: 0 0 40px rgba(183,110,121,0.5), 0 0 80px rgba(183,110,121,0.25), 0 0 120px rgba(183,110,121,0.1);
+  }
+}
+
+/* ── Animaciones Bruma (nubes lila) ── */
+@keyframes cloud-drift {
+  0% { transform: translateX(-5%) scaleX(1.1); opacity: 0.3; }
+  50% { transform: translateX(3%) scaleX(1); opacity: 0.5; }
+  100% { transform: translateX(-5%) scaleX(1.1); opacity: 0.3; }
+}
+@keyframes cloud-drift-reverse {
+  0% { transform: translateX(5%) scaleX(1.2); opacity: 0.2; }
+  50% { transform: translateX(-4%) scaleX(1); opacity: 0.4; }
+  100% { transform: translateX(5%) scaleX(1.2); opacity: 0.2; }
+}
+@keyframes cloud-pulse {
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(1.05); }
+}
+@keyframes polaroid-float {
+  0%, 100% { transform: translateY(0px) rotate(var(--rot)); }
+  50% { transform: translateY(-8px) rotate(calc(var(--rot) + 1deg)); }
 }
 
 /* ── Utilidades personalizadas ── */
@@ -117,15 +130,15 @@
 .animate-twinkle {
   animation: twinkle 2s ease-in-out infinite;
 }
-.animate-golden-pulse {
-  animation: golden-pulse 4s ease-in-out infinite;
+.animate-gold-shimmer {
+  animation: gold-shimmer 4s ease-in-out infinite;
 }
 
 /* ── Scrollbar elegante ── */
 ::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: var(--color-noche); }
+::-webkit-scrollbar-track { background: var(--color-marfil); }
 ::-webkit-scrollbar-thumb { background: var(--color-lila); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: var(--color-morado); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-rosa-oro); }
 
 /* ── Estilos base ── */
 html { scroll-behavior: smooth; }
@@ -134,4 +147,12 @@ body {
   padding: 0;
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
+}
+
+/* ── Textura de papel artesanal (Diseño 1) ── */
+.bg-paper {
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(201,160,220,0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(183,110,121,0.03) 0%, transparent 50%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
 }
