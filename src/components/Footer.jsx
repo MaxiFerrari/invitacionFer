@@ -10,7 +10,7 @@ export default function Footer() {
 
   return (
     <footer
-      className={`${s.footerBg} py-16 px-6 text-center transition-all duration-1000`}
+      className={`${s.footerBg} py-20 md:py-28 px-6 md:px-10 text-center transition-all duration-1000`}
     >
       <motion.div
         className={s.layoutClass}

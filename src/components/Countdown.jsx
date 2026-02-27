@@ -38,13 +38,13 @@ export default function Countdown() {
 
   return (
     <motion.section
-      className={`${s.sectionBg} py-20 px-6 transition-all duration-1000`}
+      className={`${s.sectionBg} py-24 md:py-32 px-6 md:px-10 transition-all duration-1000`}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
       variants={fadeUp}
     >
-      <div className={s.layoutClass}>
+      <div className={`${s.layoutClass} px-2 md:px-4`}>
         <h2
           className={`${s.headingFont} text-3xl md:text-4xl ${s.headingColor} mb-2 text-center`}
         >
@@ -56,11 +56,11 @@ export default function Countdown() {
           <span className="block w-10 h-px bg-rosa-oro/30" />
         </div>
 
-        <div className="flex justify-center gap-4 md:gap-6 flex-wrap">
+        <div className="flex justify-center gap-5 md:gap-8 flex-wrap">
           {Object.entries(time).map(([key, val]) => (
             <motion.div
               key={key}
-              className={`${s.countdownBg} ${s.cardRounded} px-5 py-6 md:px-8 md:py-8 min-w-[70px] md:min-w-[90px] text-center transition-all duration-1000`}
+              className={`${s.countdownBg} ${s.cardRounded} px-6 py-8 md:px-10 md:py-10 min-w-[80px] md:min-w-[100px] text-center transition-all duration-1000`}
               whileHover={{ scale: 1.05 }}
             >
               <motion.span

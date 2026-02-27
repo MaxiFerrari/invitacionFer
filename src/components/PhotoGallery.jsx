@@ -168,12 +168,12 @@ export default function PhotoGallery() {
 
   return (
     <motion.section
-      className={`${s.sectionBg} py-20 px-6 transition-all duration-1000`}
+      className={`${s.sectionBg} py-24 md:py-32 px-6 md:px-10 transition-all duration-1000`}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.1 }}
     >
-      <div className={s.layoutClass}>
+      <div className={`${s.layoutClass} px-2 md:px-4`}>
         <motion.h2
           className={`${s.headingFont} text-3xl md:text-4xl ${s.headingColor} mb-2 text-center`}
           variants={fadeUp}

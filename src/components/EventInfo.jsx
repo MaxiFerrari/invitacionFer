@@ -41,12 +41,12 @@ export default function EventInfo() {
 
   return (
     <motion.section
-      className={`${s.sectionBg} py-20 px-6 transition-all duration-1000`}
+      className={`${s.sectionBg} py-24 md:py-32 px-6 md:px-10 transition-all duration-1000`}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
     >
-      <div className={s.layoutClass}>
+      <div className={`${s.layoutClass} px-2 md:px-4`}>
         <motion.h2
           className={`${s.headingFont} text-3xl md:text-4xl ${s.headingColor} mb-2 text-center`}
           custom={0}
@@ -65,7 +65,7 @@ export default function EventInfo() {
           {events.map((evt, i) => (
             <motion.div
               key={i}
-              className={`${s.cardBg} ${s.cardRounded} p-8 text-center transition-all duration-1000`}
+              className={`${s.cardBg} ${s.cardRounded} p-8 md:p-10 text-center transition-all duration-1000`}
               custom={i + 1}
               variants={fadeUp}
               whileHover={{ y: -4, transition: { duration: 0.3 } }}
@@ -93,7 +93,7 @@ export default function EventInfo() {
 
         {/* Código de vestimenta */}
         <motion.div
-          className={`${s.cardBg} ${s.cardRounded} p-8 text-center mb-14 max-w-lg mx-auto transition-all duration-1000`}
+          className={`${s.cardBg} ${s.cardRounded} p-8 md:p-10 text-center mb-14 max-w-lg mx-auto transition-all duration-1000`}
           custom={3}
           variants={fadeUp}
         >

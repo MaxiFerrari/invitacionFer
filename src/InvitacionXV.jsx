@@ -14,6 +14,15 @@ import ScrollSparkles from "./components/ScrollSparkles";
    InvitacionXV – Componente orquestador principal
    ────────────────────────────────────────────── */
 
+function SectionDivider() {
+  const { styles: s } = useTheme();
+  return (
+    <div className="relative py-4">
+      <div className={`w-24 h-px mx-auto ${s.dividerColor}`} />
+    </div>
+  );
+}
+
 function InvitacionContent() {
   const { styles } = useTheme();
 
@@ -29,8 +38,11 @@ function InvitacionContent() {
       {/* ── Contenido principal ── */}
       <div className="relative z-[5]">
         <HeroSection />
+        <SectionDivider />
         <Countdown />
+        <SectionDivider />
         <PhotoGallery />
+        <SectionDivider />
         <EventInfo />
         <Footer />
       </div>

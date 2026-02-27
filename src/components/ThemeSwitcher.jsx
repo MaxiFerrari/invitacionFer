@@ -1,6 +1,6 @@
 import { useTheme, THEMES } from "../context/ThemeContext";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 /* ──────────────────────────────────────────────
    ThemeSwitcher – FAB para cambiar entre 3 temas
@@ -30,17 +30,49 @@ const themeOptions = [
 export default function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
+  const [showHint, setShowHint] = useState(true);
+
+  useEffect(() => {
+    const t = setTimeout(() => setShowHint(false), 6000);
+    return () => clearTimeout(t);
+  }, []);
 
   return (
     <div className="fixed top-4 right-4 z-50">
-      {/* Botón FAB principal */}
+      {/* Tooltip de ayuda */}
+      <AnimatePresence>
+        {showHint && !isOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: 10 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 10 }}
+            className="absolute right-full mr-3 top-1/2 -translate-y-1/2 whitespace-nowrap bg-lila-dark/90 text-white text-sm px-4 py-2 rounded-xl backdrop-blur-sm border border-lila/30 font-body shadow-lg"
+          >
+            Cambia el diseño ✨
+            <div className="absolute top-1/2 -translate-y-1/2 -right-1.5 w-3 h-3 bg-lila-dark/90 rotate-45 border-r border-t border-lila/30" />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Botón FAB principal — visible con color */}
       <motion.button
-        onClick={() => setIsOpen((o) => !o)}
-        className="w-12 h-12 rounded-full bg-white/80 backdrop-blur-md border border-lila-light/40 shadow-lg shadow-lila/10 flex items-center justify-center text-xl hover:bg-white transition-colors duration-300"
+        onClick={() => { setIsOpen((o) => !o); setShowHint(false); }}
+        className="w-14 h-14 rounded-full bg-gradient-to-br from-lila-dark to-rosa-oro border-2 border-white/50 shadow-xl shadow-lila-dark/30 flex items-center justify-center text-xl text-white hover:shadow-2xl transition-all duration-300"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 1.5, type: "spring", stiffness: 200 }}
         aria-label="Cambiar diseño"
       >
+        {/* Anillo pulsante para llamar atención */}
+        {showHint && (
+          <motion.div
+            className="absolute inset-0 rounded-full border-2 border-lila-light"
+            animate={{ scale: [1, 1.6], opacity: [0.6, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          />
+        )}
         <motion.span
           animate={{ rotate: isOpen ? 90 : 0 }}
           transition={{ duration: 0.3 }}
