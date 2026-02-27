@@ -38,6 +38,20 @@ const THEME_META = {
     bg: "bg-gradient-to-br from-white to-violet-50",
     ring: "ring-violet-300",
   },
+  [THEMES.terciopelo]: {
+    label: "Terciopelo",
+    emoji: "👑",
+    description: "Lila intenso & rosa",
+    bg: "bg-gradient-to-br from-purple-800 to-fuchsia-900",
+    ring: "ring-pink-400/60",
+  },
+  [THEMES.ensueno]: {
+    label: "Ensueño",
+    emoji: "✨",
+    description: "Lila soñador pastel",
+    bg: "bg-gradient-to-br from-purple-300 to-fuchsia-200",
+    ring: "ring-purple-400",
+  },
 };
 
 /**
@@ -116,7 +130,11 @@ export default function ThemeSwitcher() {
                   ? "bg-gradient-to-br from-white to-purple-50 shadow-lg border border-purple-200/50"
                   : theme === "porcelana"
                     ? "bg-white shadow-lg border border-violet-200"
-                    : "bg-gradient-to-br from-rose-200 to-purple-100 shadow-lg border border-rose-200/60"
+                    : theme === "terciopelo"
+                      ? "bg-gradient-to-br from-purple-800 to-fuchsia-900 shadow-[0_0_25px_rgba(168,85,247,0.4)]"
+                      : theme === "ensueno"
+                        ? "bg-gradient-to-br from-purple-300 to-fuchsia-200 shadow-lg border border-purple-300/50"
+                        : "bg-gradient-to-br from-rose-200 to-purple-100 shadow-lg border border-rose-200/60"
           }
         `}
         aria-label="Cambiar tema visual"
@@ -143,7 +161,11 @@ export default function ThemeSwitcher() {
                   ? "shadow-[0_0_20px_rgba(168,85,247,0.2)]"
                   : theme === "porcelana"
                     ? "shadow-[0_0_20px_rgba(139,92,246,0.2)]"
-                    : "shadow-[0_0_20px_rgba(244,114,182,0.3)]"
+                    : theme === "terciopelo"
+                      ? "shadow-[0_0_20px_rgba(236,72,153,0.35)]"
+                      : theme === "ensueno"
+                        ? "shadow-[0_0_20px_rgba(147,51,234,0.3)]"
+                        : "shadow-[0_0_20px_rgba(244,114,182,0.3)]"
           }
         `}
         />

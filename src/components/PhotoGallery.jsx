@@ -108,7 +108,7 @@ export default function PhotoGallery() {
               {/* Caption */}
               <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
                 <p
-                  className={`font-elegant text-sm drop-shadow-lg ${theme === "magico" ? "text-white" : theme === "porcelana" ? "text-violet-900" : "text-purple-900"}`}
+                  className={`font-elegant text-sm drop-shadow-lg ${theme === "magico" || theme === "terciopelo" ? "text-white" : theme === "porcelana" ? "text-violet-900" : "text-purple-900"}`}
                 >
                   {photo.alt}
                 </p>
@@ -158,14 +158,18 @@ export default function PhotoGallery() {
                         ? "bg-purple-400 text-white hover:bg-purple-300 border-purple-200"
                         : theme === "porcelana"
                           ? "bg-violet-600 text-white hover:bg-violet-400 border-violet-300"
-                          : "bg-rose-400 text-white hover:bg-rose-300 border-rose-200"
+                          : theme === "terciopelo"
+                            ? "bg-pink-600 text-white hover:bg-pink-400 border-pink-300"
+                            : theme === "ensueno"
+                              ? "bg-purple-600 text-white hover:bg-purple-400 border-purple-300"
+                              : "bg-rose-400 text-white hover:bg-rose-300 border-rose-200"
                 }`}
               >
                 ✕
               </button>
               <p
                 className={`text-center font-elegant mt-4 text-lg transition-colors duration-500 ${
-                  theme === "magico" ? "text-lila-light" : theme === "jardin" ? "text-stone-700" : "text-white"
+                  theme === "magico" || theme === "terciopelo" ? "text-lila-light" : theme === "jardin" ? "text-stone-700" : theme === "ensueno" ? "text-purple-800" : "text-white"
                 }`}
               >
                 {selectedPhoto.alt}

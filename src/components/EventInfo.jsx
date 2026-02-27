@@ -186,7 +186,11 @@ export default function EventInfo() {
                     ? "text-white hover:shadow-[0_0_25px_rgba(168,85,247,0.25)]"
                     : theme === "porcelana"
                       ? "text-white hover:shadow-[0_0_25px_rgba(139,92,246,0.3)]"
-                      : "text-white hover:shadow-[0_0_30px_rgba(244,114,182,0.3)]"
+                      : theme === "terciopelo"
+                        ? "text-white hover:shadow-[0_0_30px_rgba(236,72,153,0.4)]"
+                        : theme === "ensueno"
+                          ? "text-white hover:shadow-[0_0_30px_rgba(147,51,234,0.35)]"
+                          : "text-white hover:shadow-[0_0_30px_rgba(244,114,182,0.3)]"
             }`}
           >
             {/* Fondo gradiente */}

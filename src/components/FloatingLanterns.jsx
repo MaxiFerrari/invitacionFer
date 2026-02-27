@@ -23,7 +23,7 @@ export default function FloatingLanterns({ count = 25 }) {
   return (
     <div
       className={`fixed inset-0 overflow-hidden pointer-events-none z-0 transition-opacity duration-700 ${
-        theme === "magico" ? "opacity-100" : "opacity-0"
+        theme === "magico" || theme === "terciopelo" ? "opacity-100" : "opacity-0"
       }`}
     >
       {/* Cielo con gradiente animado */}

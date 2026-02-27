@@ -229,7 +229,11 @@ export default function HeroSection() {
                   ? "drop-shadow-[0_0_15px_rgba(168,85,247,0.15)] opacity-60"
                   : theme === "porcelana"
                     ? "drop-shadow-[0_0_10px_rgba(139,92,246,0.15)] opacity-50"
-                    : "drop-shadow-[0_0_20px_rgba(244,114,182,0.3)] opacity-80"
+                    : theme === "terciopelo"
+                      ? "drop-shadow-[0_0_25px_rgba(236,72,153,0.3)] opacity-70"
+                      : theme === "ensueno"
+                        ? "drop-shadow-[0_0_20px_rgba(147,51,234,0.25)] opacity-75"
+                        : "drop-shadow-[0_0_20px_rgba(244,114,182,0.3)] opacity-80"
           }`}
         />
       </motion.div>
@@ -240,7 +244,7 @@ export default function HeroSection() {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1.2, delay: 0.3 }}
         className={`absolute left-2 bottom-0 md:left-12 transition-opacity duration-500 ${
-          theme === "castillo" || theme === "porcelana" ? "opacity-40" : theme === "jardin" ? "opacity-30" : "opacity-60"
+          theme === "castillo" || theme === "porcelana" ? "opacity-40" : theme === "jardin" ? "opacity-30" : theme === "ensueno" ? "opacity-50" : "opacity-60"
         }`}
       >
         <TowerSilhouette className="w-24 h-40 md:w-32 md:h-56" />
