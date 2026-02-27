@@ -141,8 +141,8 @@ export const S = {
     glowColor: "shadow-lila/20",
 
     countdownBg: "bg-white/15 backdrop-blur-xl border border-white/30",
-    countdownNum: "text-white",
-    countdownLabel: "text-lila-light",
+    countdownNum: "text-lila-dark",
+    countdownLabel: "text-rosa-oro/80",
 
     photoBorder: "border-8 border-white/80 rounded-sm shadow-xl shadow-lila/15",
     photoShape: "rounded-sm",
