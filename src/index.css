@@ -1,0 +1,147 @@
+@import "tailwindcss";
+
+/* ── Google Fonts (loaded in index.html) ── */
+/* Great Vibes — títulos mágicos */
+/* Cormorant Garamond — texto elegante */
+/* Montserrat — cuerpo limpio */
+
+@theme {
+  --font-fairy: "Great Vibes", cursive;
+  --font-elegant: "Cormorant Garamond", serif;
+  --font-body: "Montserrat", sans-serif;
+
+  /* Paleta Rapunzel */
+  --color-lila: #c9a0dc;
+  --color-lila-light: #e8d5f5;
+  --color-lila-dark: #7b2d8e;
+  --color-morado: #6a0dad;
+  --color-dorado: #ffd700;
+  --color-dorado-soft: #f5cc00;
+  --color-dorado-dark: #b8860b;
+  --color-noche: #1a0a2e;
+  --color-noche-light: #2d1b4e;
+}
+
+/* ── Animación de gradiente de fondo ── */
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-30px) scale(1.05);
+  }
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.4;
+    filter: blur(8px);
+  }
+  50% {
+    opacity: 0.8;
+    filter: blur(12px);
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes lantern-rise {
+  0% {
+    transform: translateY(100vh) scale(0.5);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-20vh) scale(1);
+    opacity: 0;
+  }
+}
+
+/* ── Utilidades personalizadas ── */
+.animate-gradient {
+  background-size: 400% 400%;
+  animation: gradient-shift 15s ease infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 8s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+.animate-twinkle {
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+/* ── Scrollbar elegante ── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-noche);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-lila);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-morado);
+}
+
+/* ── Estilos base ── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
